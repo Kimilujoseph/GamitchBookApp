@@ -1,0 +1,55 @@
+body{
+    font-size: 90%;
+    color: black;
+    background-image: url('/images/pexels-henry-&-co-1939485.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#imageBrand{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.collapse ul li a{
+    transition: 250ms all;
+    color: white;
+}
+.dropdown a{
+    color: black;
+}
+.active{
+    border-bottom: 2px solid orange;
+}
+.collapse ul li a:hover{
+    color: orange;
+    transform: scale(1.1);
+}
+
+.image-item img{
+    height: 470px;
+    border-radius: 31% 69% 27% 73% / 43% 58% 42% 57%;
+}
+
+.imageLink{
+    height: 120px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    transition: 250ms all;
+    overflow: hidden;
+    transition: 250ms all;
+}
+
+.imageLink img{
+    width: 100%;
+    object-fit: cover;
+}
+.imageLink:hover{
+    transform: scale(1.1);
+}
+.category_link{
+    text-align: center;
+    text-decoration: none;
+}
