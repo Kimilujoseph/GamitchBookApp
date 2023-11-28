@@ -1,0 +1,22 @@
+<h1 class="dispaly-1 px-2 mt-3">Categories</h1>
+
+<div class="px-2 mt-3">
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="/">About</a>
+    <span class="breadcrumb-item active" aria-current="page">Categories</span>
+</nav>
+</div>
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+    <% if (categories != ''){%>
+        <% categories.forEach(function(category,index){ %>
+          <a href="<%-category.Nameofthecategory%>" class="category_link">
+            <div class="imageLink">
+              <img src="/images/<%-category.Image%>" alt="an image">
+            </div>
+            <div class="pt-1"><%= category.Nameofthecategory%></div>
+          </a>
+         <%})%>
+    
+       <%}%>    
+</div>

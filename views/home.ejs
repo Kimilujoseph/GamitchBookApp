@@ -19,133 +19,81 @@
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
           <div class="dropdown-menu" aria-labelledby="dropdownId">
-            <a class="dropdown-item" href="#">Fantasy</a>
-            <a class="dropdown-item" href="#">Fiction</a>
-            <a class="dropdown-item" href="#">Horror</a>
-            <a class="dropdown-item" href="#">Crime</a>
-            <a class="dropdown-item" href="#">Horror</a>
-            <a class="dropdown-item" href="#">Thriller</a>
+            <a class="dropdown-item text-dark" href="#">Fantasy</a>
+            <a class="dropdown-item text-dark" href="#">Fiction</a>
+            <a class="dropdown-item text-dark" href="#">Horror</a>
+            <a class="dropdown-item text-dark" href="#">Crime</a>
+            <a class="dropdown-item text-dark" href="#">Self Improvement</a>
+            <a class="dropdown-item text-dark" href="#">Thriller</a>
           </div>
         </li>
       </ul>
   </nav>
-   <div id="carouselId" class="carousel slide" data-bs-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
-      <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
-      <li data-bs-target="#carouselId" data-bs-slide-to="2" aria-label="Third slide"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-      <div class="carousel-item active">
-        <div class="row  flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
-          <div class="col-12 col-lg-6 image-item">
-            <img src="/images/library.png" alt="a student reading" width="607" height="510px" class="d-block mx-lg-auto img-fluid" loading="lazy">
-          </div>
-           <div class="col-12  col-lg-6">
-            <h1 class="dispaly-1 fw-bolder">We are the biggest book blog</h1>
-            <p class="lead">
-              Explore the books that we provide around here in our website
-              Explore the books that we provide around here in our websiteExplore the books that we provide around here in our websiteExplore the books that we provide around here in our website
-              Explore the books that we provide around here in our websiteExplore the books that we provide around here in our website
-            </p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <a href="#" class="btn btn-primary btn-dark btn-lg px-4">Login</a>
-              <a href="#" class="btn btn-primary btn-dark btn-lg px-4">Login</a>
+        <!-- introduction cover -->
+     <%if (books != ''){%>
+       <%books.forEach(function(book,index){%>
+          <div class="row  flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
+            <div class="col-12 col-lg-6 image-item">
+              <img src="/images/<%-book.Image%>" alt="a student reading" width="607" height="510px" class="d-block mx-lg-auto img-fluid" loading="lazy">
             </div>
-        
+             <div class="col-12  col-lg-6">
+              <h1 class="dispaly-1 fw-bold">#1:<span style="color: orange;line-height: 250%; font-size: 150%;"><%-book.Nameofthebook%></span></h1>
+              <p class="lead"><%-book.Description.substring(0,398)%><a href="/about/<%-book._id%>""/a>ReadMore....</p>
+              <div class="d-grid gap-4 d-md-flex justify-content-md-center">
+                <a href="#" class="btn btn-outline-dark  btn-md px-4"><%-book.Rating%></a>
+                <a href="#" class="btn btn-outline-dark  btn-md px-4">Login</a>
+              </div>
+          
+             </div>
            </div>
-         </div>
-      </div>
-      <div class="carousel-item">
-        <div class="row  flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
-          <div class="col-12 col-lg-6 image-item">
-            <img src="/images/library.png" alt="a student reading" width="607" height="510px" class="d-block mx-lg-auto img-fluid" loading="lazy">
           </div>
-           <div class="col-12  col-lg-6">
-            <h1 class="dispaly-1 fw-bolder">We are the biggest book blog</h1>
-            <p class="lead">
-              Explore the books that we provide around here in our website
-              Explore the books that we provide around here in our websiteExplore the books that we provide around here in our websiteExplore the books that we provide around here in our website
-              Explore the books that we provide around here in our websiteExplore the books that we provide around here in our website
-            </p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <a href="#" class="btn btn-primary btn-dark btn-lg px-4">Login</a>
-              <a href="#" class="btn btn-primary btn-dark btn-lg px-4">Login</a>
-            </div>
-        
-           </div>
-         </div>
+      <%})%>
+     <%}%>
+    
+      <!-- category item -->
+
+   <div class="container">
+    <section class="mt-5">
+      <div class="d-flex justify-content-md-center">
+        <h1 class="display-3 fw-bolder">Categories</h1>
+      <a href="/categories" class="ms-auto"><span style="line-height: 150%;">view more</span></a>
       </div>
-      <div class="carousel-item">
-        <div class="row  flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
-          <div class="col-12 col-lg-6 image-item">
-            <img src="/images/library.png" alt="a student reading" width="607" height="510px" class="d-block mx-lg-auto img-fluid" loading="lazy">
+     </section>
+  
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+     
+     <% if (categories != ''){%>
+      <% categories.forEach(function(category,index){ %>
+        <a href="<%-category.Nameofthecategory%>" class="category_link">
+          <div class="imageLink">
+            <img src="/images/<%-category.Image%>" alt="an image">
           </div>
-           <div class="col-12  col-lg-6">
-            <h1 class="dispaly-1 fw-bolder">We are the biggest book blog</h1>
-            <p class="lead">
-              Explore the books that we provide around here in our website
-              Explore the books that we provide around here in our websiteExplore the books that we provide around here in our websiteExplore the books that we provide around here in our website
-              Explore the books that we provide around here in our websiteExplore the books that we provide around here in our website
-            </p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-              <a href="#" class="btn btn-primary btn-dark btn-lg px-4">Login</a>
-              <a href="#" class="btn btn-primary btn-dark btn-lg px-4">Login</a>
-            </div>
-        
-           </div>
-         </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselId" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-      </button>
+          <div class="pt-1"><%= category.Nameofthecategory%></div>
+        </a>
+       <%})%>
+  
+     <%}%>
+  </div>
    </div>
 
+   <div class="container">
+    <section class="d-flex mt-2">
+      <h1 class="display-1">Latest Book</h1>
+      <a href="morebooks" class="ms-auto">view more</a>
+    </section>
+   
+     
+<div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 text-center">
+    <%if(latest != ''){%>
+         <%latest.forEach((latest,index)=>{%>
+          <a href="about/<%-latest._id%>" class="latest-book">
+            <div class="latest-img">
+              <img src="/images/<%-latest.Image%>" alt="<%-latest.Nameofthebook%>">
+            </div>
+            <h4><%=latest.Nameofthebook%></h4>
+           </a>
+         <%})%>
+    <%}%>
+</div>
 
-   <!-- categories items -->
-
-   <section class="mt-5">
-    <div class="d-flex justify-content-md-center">
-      <h1 class="display-3 fw-bolder">Categories</h1>
-    <a href="#" class="ms-auto">view more</a>
-    </div>
-   </section>
-
-   <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-    <a href="#" class="category_link">
-      <div class="imageLink">
-        <img src="/images/uVfaZkQ4h19j.png" alt="an image">
-      </div>
-      <div class="pt-1">Self-growth</div>
-    </a>
-    <a href="#" class="category_link">
-      <div class="imageLink">
-        <img src="/images/pexels-pixabay-326333.jpg" alt="an image">
-        <div class="pt-1">Thriller</div>
-      </div>
-    </a>
-    <a href="#" class="category_link">
-      <div class="imageLink">
-        <img src="/images/ux7yQHALue-k.png" alt="an image">
-      </div>
-      <p>Fictions</p>
-    </a>
-    <a href="#" class="category_link">
-      <div class="imageLink">
-        <img src="/images/pexels-jess-bailey-designs-743986.jpg" alt="an image">
-      </div>
-      <p>Fictions</p>
-    </a>
-    <a href="#" class="category_link">
-      <div class="imageLink">
-        <img src="/images/uVfaZkQ4h19j.png" alt="an image">
-      </div>
-      <p>Fictions</p>
-    </a>
    </div>

@@ -1,0 +1,22 @@
+<div class="container">
+    <section class="d-flex mt-3 px-4">
+        <h1 class="dispaly-1">The library</h1>
+    </section>
+    <nav class="breadcrumb">
+        <a class="breadcrumb-item" href="/">Home</a>
+        <span class="breadcrumb-item active" aria-current="page">more</span>
+    </nav>
+
+    <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 text-center">
+        <%if(allbooks != ''){%>
+             <%allbooks.forEach((books,index)=>{%>
+              <a href="about/<%-books.Nameofthebook%>" class="latest-book">
+                <div class="latest-img">
+                  <img src="/images/<%-books.Image%>" alt="<%-books.Nameofthebook%>">
+                </div>
+                <h4><%=books.Nameofthebook%></h4>
+               </a>
+             <%})%>
+        <%}%>
+    </div>
+</div>

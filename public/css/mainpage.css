@@ -29,7 +29,7 @@ body{
 
 .image-item img{
     height: 470px;
-    border-radius: 31% 69% 27% 73% / 43% 58% 42% 57%;
+    border-radius:31% 69% 49% 51% / 30% 38% 62% 70%  ;
 }
 
 .imageLink{
@@ -52,4 +52,43 @@ body{
 .category_link{
     text-align: center;
     text-decoration: none;
+}
+
+.latest-img{
+    height: 280px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow:8px 8px 8px 8px rgba(0,0,0,0.4);
+    transition: 250ms;
+}
+.latest-img:hover{
+    transform: scale(1.1);
+}
+
+.latest-link img{
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    object-position: center;
+}
+.latest-link{
+    text-align: center;
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.btn{
+   border-radius: 11px;
+   padding: 15px;
+   font-size: 150%;
+   background-color: #000;
+   color: white;
+   width: 50%;
+   transition: 250ms all;
+}
+
+.btn:hover{
+    transform: scale(1.1);
 }
