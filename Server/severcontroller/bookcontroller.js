@@ -2,10 +2,6 @@
 require('../model/database');
 const model = require('../model/model');
 const model2 = require('../model/model2')
-
-
-
-
 exports.homepage = async function(req,res){
  try{
     const limitNumber = 5;
@@ -18,7 +14,6 @@ exports.homepage = async function(req,res){
     res.status(500).send({message:error.message || "an error has occured"})
  }
 }
-
 exports.categories = async function(req,res){
    try {
     const categories = await model.find({})
@@ -27,7 +22,6 @@ exports.categories = async function(req,res){
        res.status(500).send({message:error.message || "an error has occured"})
    }
 }
-
 exports.morebooks = async function(req,res){
     try{
         const allbooks = await model2.find({}).sort({_id:1});
@@ -37,8 +31,6 @@ exports.morebooks = async function(req,res){
         res.status(500).send({message:error.message} || "an error has just occured")
     }
 }
-
-
 exports.descriptionofthebook = async function(req,res){
     try{
         const bookid = req.params;
@@ -49,151 +41,161 @@ exports.descriptionofthebook = async function(req,res){
         res.status(500).send({message:error.message} ||  "error has just occured inside the server")
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-async function insertdummydata(){
+exports.categoryofthebook = async (req,res)=>{
     try{
-         await model2.insertMany([
-             {
-                 "Nameofthebook":"book32",
-                "Image":"book32.jpg",
-                "Author":"Lewis Joshua",
-                 "Publisher":"targeter@company",
-                 "PublishingDate":"2013-05-05",
-                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                "Categories_NameoftheCategory":"Romance",
-                "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "8.93",
-                 "Cost":"ksh 3000"
-             },
-             {
-                "Nameofthebook":"book17",
-                "Image":"book17.jpg",
-                 "Author":"Lewis Mark",
-                 "Publisher":"targeter@company",
-                "PublishingDate":"2013-05-05",
-                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Categories_NameoftheCategory":"Thrillers",
-                "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "9.93",
-                 "Cost":"ksh 3500"
-            },
-             {
-                 "Nameofthebook":"book12",
-                 "Image":"book12.jpg",
-                 "Author":"Alex Joshua",
-                 "Publisher":"targeter@company",
-                 "PublishingDate":"2013-05-05",
-                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Categories_NameoftheCategory":"Fictions",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "7.93",
-                 "Cost":"ksh 2500"
-             }, {
-                 "Nameofthebook":"book4",
-                 "Image":"book4.jpg",
-                 "Author":"Mitchelle Faith",
-                "Publisher":"targeter@company",
-                 "PublishingDate":"2013-05-05",
-                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Categories_NameoftheCategory":"Horror",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "8.93",
-                 "Cost":"ksh 4500"
-             }, {
-                 "Nameofthebook":"book23",
-                 "Image":"book23.jpg",
-                 "Author":"Gamitch Tokodi",
-                 "Publisher":"targeter@company",
-                 "PublishingDate":"2013-05-05",
-                "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                "Categories_NameoftheCategory":"Crime",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "8.93",
-                 "Cost":"ksh 3000"
-             },
-             {
-                "Nameofthebook":"book15",
-                 "Image":"book15.jpg",
-                "Author":"Edwin Pascal",
-                 "Publisher":"targeter@company",
-                 "PublishingDate":"2013-05-05",
-                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Categories_NameoftheCategory":"Fictions",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "9.0",
-                 "Cost":"ksh 4000"
-            },
-             {
-                 "Nameofthebook":"book24",
-                 "Image":"book24.jpg",
-                 "Author":"Lewis Joshua",
-                "Publisher":"targeter@company",
-                "PublishingDate":"2013-05-05",
-                "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Categories_NameoftheCategory":"Crime",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                "Rating": "8.93",
-                "Cost":"ksh 3900"
-             },
-             {
-                "Nameofthebook":"book19",
-                "Image":"book35.jpg",
-                 "Author":"Kimilu Joseph",
-                 "Publisher":"targeter@company",
-                 "PublishingDate":"2013-05-05",
-                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Categories_NameoftheCategory":"Thrillers",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                 "Rating": "8.93",
-                 "Cost":"ksh 4000"
-            },
-            {
-                "Nameofthebook":"book10",
-                 "Image":"book32.jpg",
-                 "Author":"Anita Web",
-                 "Publisher":"targeter@company",
-                "PublishingDate":"2013-05-05",
-                "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                "Categories_NameoftheCategory":"Self-Improvement",
-                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
-                "Rating": "8.93",
-                 "Cost":"ksh 3000"
-             },
-            
-         ])
+         const categoryname =  req.params.categoryname;
+         const category = await model2.find({Categories_NameoftheCategory:categoryname})
+         res.render("categorypage",{title:categoryname,category})
     }
+
     catch(error){
-         console.log(error);
+        res.status(500).send({message:error.message} || "error has shust occured inside the server")
     }
- }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// async function insertdummydata(){
+//     try{
+//          await model2.insertMany([
+//              {
+//                  "Nameofthebook":"book32",
+//                 "Image":"book32.jpg",
+//                 "Author":"Lewis Joshua",
+//                  "Publisher":"targeter@company",
+//                  "PublishingDate":"2013-05-05",
+//                  "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                 "Categories_NameoftheCategory":"Romance",
+//                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "8.93",
+//                  "Cost":"ksh 3000"
+//              },
+//              {
+//                 "Nameofthebook":"book17",
+//                 "Image":"book17.jpg",
+//                  "Author":"Lewis Mark",
+//                  "Publisher":"targeter@company",
+//                 "PublishingDate":"2013-05-05",
+//                  "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Categories_NameoftheCategory":"Thrillers",
+//                 "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "9.93",
+//                  "Cost":"ksh 3500"
+//             },
+//              {
+//                  "Nameofthebook":"book12",
+//                  "Image":"book12.jpg",
+//                  "Author":"Alex Joshua",
+//                  "Publisher":"targeter@company",
+//                  "PublishingDate":"2013-05-05",
+//                  "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Categories_NameoftheCategory":"Fictions",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "7.93",
+//                  "Cost":"ksh 2500"
+//              }, {
+//                  "Nameofthebook":"book4",
+//                  "Image":"book4.jpg",
+//                  "Author":"Mitchelle Faith",
+//                 "Publisher":"targeter@company",
+//                  "PublishingDate":"2013-05-05",
+//                  "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Categories_NameoftheCategory":"Horror",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "8.93",
+//                  "Cost":"ksh 4500"
+//              }, {
+//                  "Nameofthebook":"book23",
+//                  "Image":"book23.jpg",
+//                  "Author":"Gamitch Tokodi",
+//                  "Publisher":"targeter@company",
+//                  "PublishingDate":"2013-05-05",
+//                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                 "Categories_NameoftheCategory":"Crime",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "8.93",
+//                  "Cost":"ksh 3000"
+//              },
+//              {
+//                 "Nameofthebook":"book15",
+//                  "Image":"book15.jpg",
+//                 "Author":"Edwin Pascal",
+//                  "Publisher":"targeter@company",
+//                  "PublishingDate":"2013-05-05",
+//                  "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Categories_NameoftheCategory":"Fictions",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "9.0",
+//                  "Cost":"ksh 4000"
+//             },
+//              {
+//                  "Nameofthebook":"book24",
+//                  "Image":"book24.jpg",
+//                  "Author":"Lewis Joshua",
+//                 "Publisher":"targeter@company",
+//                 "PublishingDate":"2013-05-05",
+//                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Categories_NameoftheCategory":"Crime",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                 "Rating": "8.93",
+//                 "Cost":"ksh 3900"
+//              },
+//              {
+//                 "Nameofthebook":"book19",
+//                 "Image":"book35.jpg",
+//                  "Author":"Kimilu Joseph",
+//                  "Publisher":"targeter@company",
+//                  "PublishingDate":"2013-05-05",
+//                  "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Categories_NameoftheCategory":"Thrillers",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                  "Rating": "8.93",
+//                  "Cost":"ksh 4000"
+//             },
+//             {
+//                 "Nameofthebook":"book10",
+//                  "Image":"book32.jpg",
+//                  "Author":"Anita Web",
+//                  "Publisher":"targeter@company",
+//                 "PublishingDate":"2013-05-05",
+//                 "Description":"An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common and,An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                 "Categories_NameoftheCategory":"Self-Improvement",
+//                  "Review":"An extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common andAn extensive class of modifiers exists for manipulating arrays. Arrays are common and",
+//                 "Rating": "8.93",
+//                  "Cost":"ksh 3000"
+//              },
+            
+//          ])
+//     }
+//     catch(error){
+//          console.log(error);
+//     }
+//  }
 
  //insertdummydata()
 

@@ -1,57 +1,45 @@
-<section>
-    <h1 class="display-1"><%-specifiedbook.Nameofthebook%></h1>
-</section>
+<%-include("./partials/tabs.ejs") %>
+<%if(specifiedbook != null){%>
+    <nav class="breadcrumb mt-4">
+        <a class="breadcrumb-item" href="/">Main</a>
+        <a class="breadcrumb-item" href="/categories/<%-specifiedbook.Categories_NameoftheCategory%>"><%-specifiedbook.Categories_NameoftheCategory%></a>
+        <span class="breadcrumb-item active" aria-current="page"><%- specifiedbook.Nameofthebook%></span>
+    </nav> 
 
-<div class="container mt-5 px-3 py-3">
-    <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="#">Main</a>
-        <span class="breadcrumb-item active" aria-current="page"><%-specifiedbook.Nameofthebook%></span>
-    </nav>
-
-    <!-- <div class="row mt-5">
-        <div class="col-12 col-md-4 category-products">
-            <img src="/images/<%-specifiedbook.Image %>" alt="<%-specifiedbook.Nameofthebook %>"  class="img-fluid stick-top" style="top: 20px;" loading="lazy">
-        </div>
-
-        <div class="col-12  col-md-8">
-            <div class="row">
-                <div class="col-12"><h1><%specifiedbook.Name%></h1></div>
-                <div class="col-12" style="white-space:pre-line;">
-                    <h4>Product Details</h4>
-                    <p><%-specifiedbook.Description%></p>
-
-                    <div><button class="btn btn-lg btn-outline-success"><%- specifiedbook.Rating %></button>
-                        <button class="btn btn-lg btn-outline-success mt-4"> Add Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-   
-
-
-
-
-
-
-
-
-
-     <div class="row  g-lg-3">
-        <div class="col-12 col-md-4">
-            <div class="image-property">
-                <img src="/images/<%-specifiedbook.Image%>" alt="name" class="img-fliud stick-top" loading="lazy" style="top: 20px; height: 500px; width: 100%;">
-            </div>
-            <div class="d-flex mt-2 gap-2">
-                <a href="#" class="btn btn-outline-dark btn-md mt-3"><%-specifiedbook.Rating%></a>
-                <a href="#" class="btn btn-outline-dark btn-md mt-3">Rate</a>
-            </div>
-        </div>
-        <div class="col-12 col-md-8">
-            <h5><%=specifiedbook.Nameofthebook%></h5>
-            <h6><%=specifiedbook.Author%></h6>
-            <p><%=specifiedbook.Description%></p>
-        </div>
+   <div class="row">
+    <div class="col-12 col-md-4">
+        <img src="/images/<%-specifiedbook.Image%>" alt="<%-specifiedbook.Nameofthebook%>" style="top: 20px; height: 500px; width: 100%; z-index: -1;"  class="img-fluid sticky-top" loading="lazy">
     </div>
-</div>
+    <div class="col-12 col-md-8">
+        <div class="row">
+            <div class="col-12"><h1><%-specifiedbook.Nameofthebook%></h1></div>
+                <div class="col-12 mb-2"><i class="fas fa-tag"></i><%-specifiedbook.Categories_NameoftheCategory%></div>
+                <div class="col-12 mb-2"><p>by Author:<%-specifiedbook.Author%></p></div>
+                <div class="col-12 mb-2"><p>published by:<%-specifiedbook.Publisher%></p></div>
+                <div class="col-12 mb-2"><p>published on date:<%-specifiedbook.PublishingDate%></p></div>
+                <hr>
+                <div class="col-12" style="white-space: pre-line;">
+                    <h4>Description</h4>
+                    <%- specifiedbook.Description%>
+                </div>
+                <div class="d-flex gap-4 mt-3 mb-4">
+                <button class="btn btn-outline-dark">Purchase</button>
+                <button class="btn btn-outline-dark">Purchase</button>    
+                </div>
+        </div>
+    </div>  
+   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<%}%>

@@ -10,7 +10,7 @@
 <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
     <% if (categories != ''){%>
         <% categories.forEach(function(category,index){ %>
-          <a href="<%-category.Nameofthecategory%>" class="category_link">
+          <a href="/categories/<%-category.Nameofthecategory%>" class="category_link">
             <div class="imageLink">
               <img src="/images/<%-category.Image%>" alt="an image">
             </div>

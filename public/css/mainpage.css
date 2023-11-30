@@ -92,3 +92,21 @@ body{
 .btn:hover{
     transform: scale(1.1);
 }
+
+.imageLink2{
+    height: 320px;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    transition: 250ms all;
+    overflow: hidden;
+    transition: 250ms all;
+    box-shadow:  4px 4px 4px 4px rgba(0,0,0,0.4);
+}
+.imageLink2 img{
+    width: 100%;
+    object-fit: cover;
+}
+.imageLink2:hover{
+    transform: scale(1.1);
+}

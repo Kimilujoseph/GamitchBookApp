@@ -1,3 +1,4 @@
+<%-include("./partials/tabs.ejs") %>
 <div class="container">
     <section class="d-flex mt-3 px-4">
         <h1 class="dispaly-1">The library</h1>
@@ -10,7 +11,7 @@
     <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 text-center">
         <%if(allbooks != ''){%>
              <%allbooks.forEach((books,index)=>{%>
-              <a href="about/<%-books.Nameofthebook%>" class="latest-book">
+              <a href="about/<%-books._id%>" class="latest-book">
                 <div class="latest-img">
                   <img src="/images/<%-books.Image%>" alt="<%-books.Nameofthebook%>">
                 </div>
