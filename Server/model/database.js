@@ -1,4 +1,4 @@
-equire('../model/model')
+require('../model/model')
 require('../model/model2')
 const mongoose = require('mongoose');
 
