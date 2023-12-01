@@ -1,23 +1,23 @@
 {
-  "name": "blogapplication",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
+ "name": "blogapplication",
+ "version": "1.0.0",
+ "description": "",
+ "main": "index.js",
+ "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start":"node app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.2",
-    "bootstrap": "^5.3.2",
-    "ejs": "^3.1.9",
-    "express": "^4.18.2",
-    "express-ejs-layouts": "^2.5.1",
-    "express-session": "^1.17.3",
-    "mongoose": "^8.0.1",
-    "nodemon": "^3.0.1"
-  }
+ },
+ "keywords": [],
+ "author": "",
+ "license": "ISC",
+ "dependencies": {
+    "body-parser": "^1.20.2", // Parse incoming request bodies in a middleware before your handlers.
+    "bootstrap": "^5.3.2", // Front-end component library for building responsive, mobile-first projects on the web.
+    "ejs": "^3.1.9", // Embedded JavaScript templating engine.
+    "express": "^4.18.2", // Fast, unopinionated, minimalist web framework for Node.js.
+    "express-ejs-layouts": "^2.5.1", // This plugin enables the use of layouts in EJS when used with Express.
+    "express-session": "^1.17.3", // Simple session middleware for Express.
+    "mongoose": "^8.0.1", // MongoDB object modeling tool for Node.js.
+    "nodemon": "^3.0.1" // Simple monitor script for use during development.
+ }
 }
