@@ -1,31 +1,58 @@
-<nav class="tab2 navbar navbar-expand-sm navbar-light bg-dark">
-    <div class="container">
-    <a class="navbar-brand" href="#"><img id="imageBrand"src="/images/library.png" >  </a>
-    <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavId">
-      <ul class="navbar-nav me-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" href="#" aria-current="page">Home <span class="visually-hidden">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Popular</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Latest</a>
-        </li>
-        <li class="nav-item dropdown" style="z-index: 1;">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Category</a>
-          <div class="dropdown-menu" aria-labelledby="dropdownId">
-            <a class="dropdown-item text-dark" href="/categories/Fantasy">Fantasy</a>
-            <a class="dropdown-item text-dark" href="/categories/Fictions">Fiction</a>
-            <a class="dropdown-item text-dark" href="/categories/Horror">Horror</a>
-            <a class="dropdown-item text-dark" href="/categories/Crime">Crime</a>
-            <a class="dropdown-item text-dark" href="/categories/Self-Improvement">Self Improvement</a>
-            <a class="dropdown-item text-dark" href="/categories/Thriller">Thriller</a>
-          </div>
-        </li>
-      </ul>
-  </nav>
+<!-- tabs-start-section -->
+<section>
+    <div class="header">
+        <div class="container">
+            <div class="header-items">
+                <nav class="navbar navbar-expand-lg ">
+                    <div class="container">
+                        <div class="header-log">
+                            <i>Book<span>Blog</span></i>
+                        </div>
+                        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="collapse navbar-collapse" id="collapsibleNavId">
+                            <div class="nav-items">
+                                <ul class="navbar-nav me-auto mt-2 mt-lg-0 ml-auto">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="/" aria-current="page">Home
+                                            <span class="visually-hidden">(current)</span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Link</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#">Blogs</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" id="dropdownId"
+                                            data-bs-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">Genre</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownId">
+                                            <a class="dropdown-item" href="/genre/fiction">fictions</a>
+                                            <a class="dropdown-item" href="/genre/thriller">thriller</a>
+                                            <a class="dropdown-item" href="/genre/self improvement">self-improvement</a>
+                                            <a class="dropdown-item" href="/genre/horror">horror</a>
+                                            <a class="dropdown-item" href="/genre/fantasy">fantasy</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="search-button">
+                                <form method="post" action="/search" class="d-flex my-2 my-lg-0 gap-2 ">
+                                    <input class="form-control me-sm-2" type="search" name="searchTerm"
+                                        placeholder="Search" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- tabs-end-section -->

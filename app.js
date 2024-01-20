@@ -1,23 +1,37 @@
-const express = require('express');
-const  app  = express();
-const route = require('./Server/serverkroute/bookrouter')
-const expresslayout = require('express-ejs-layouts');
-const port  = process.env.PORT||4000;
-// using static files
+const express = require('express')
+const route = require('./routes/bookroute')
+const expresslayout = require('express-ejs-layouts')
+const fileupload = require('express-fileupload')
+const session = require('express-session')
+const flash = require('connect-flash')
+const cookieparser = require('cookie-parser')
+const dotenv = require('dotenv')
+const app = express();
+const port = process.env.PORT || 4500;
+dotenv.config()
+//used to parse the req.body
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
+//use of the static files
 app.use(express.static('public'));
 app.use(express.static('node_modules'));
-app.use(expresslayout)
+app.use(expresslayout);
 
-//setting ejs templates
+//use session and flush messages
+app.use(cookieparser('BookBlogSecure'));
+app.use(session({
+    secret: 'bookblogsecretSession',
+    saveUninitialized: true,
+    resave: true
+}))
+app.use(flash())
+app.use(fileupload())
 
-app.set('layout','./layouts/main')
-app.set('view engine','ejs')
+//settingup the ejs engine
 
-//importing the route
+app.set('view engine', 'ejs');
+app.set('layout', './layouts/main')
 app.use(route)
 
-
-
-
-app.listen(port,()=>console.log(`The port is listening inn port ${port}`));
+app.listen(port, () => console.log(`The server is listening on port ${port}`))

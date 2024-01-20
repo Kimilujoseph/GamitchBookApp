@@ -1,0 +1,42 @@
+<%- include('./partials/tabs.ejs') %>
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-center align-items-center g-2 text-center">
+                <div class="col-sm-12 col-md-8 col-lg-6 pt-3">
+                    <h4 display-5 class="fw-bold">signin your email for our weekly newsletter</h4>
+                </div>
+            </div>
+
+            <div class="row justify-content-center align-items-center">
+                <div class="col-sm-12 col-md-8 col-lg-6">
+                    <%if(infoerrorObj !='' ){%>
+                        <div class="alert alert-danger" role="alert">
+                            <strong><%-infoerrorObj%></strong>
+                        </div>
+
+                        <%}%>
+
+                            <%if(successObj !='' ){%>
+                                <div class="alert alert-primary" role="alert">
+                                    <strong><%- successObj%></strong>
+                                </div>
+
+                                <%}%>
+                                    <form action="/submitemail" method="post">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label mt-4">Email</label>
+                                            <input type="email" class="form-control" name="email" id=""
+                                                aria-describedby="emailHelpId" placeholder="abc@mail.com" />
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-success btn-md">submit email</button>
+                                        </div>
+                                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <%- include("./partials/footer.ejs") %>
+    </footer>

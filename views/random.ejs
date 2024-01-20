@@ -1,0 +1,57 @@
+<%- include('./partials/tabs.ejs') %>
+
+    <!-- book-section-start -->
+    <% if(chosenbook !='' ){ %>
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-md-12 col-lg-4 text-center">
+                    <nav class="breadcrumb">
+                        <a class="breadcrumb-item" href="/">Home</a>
+                        <span class="breadcrumb-item active" aria-current="page">
+                            <%=chosenbook.genre%>
+                        </span>
+                        <span class="breadcrumb-item active" aria-current="page">
+                            <%=chosenbook.nameofthebook%>
+                        </span>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+        <section class="book-section">
+            <div class="container">
+                <div class="row row-cols-8 row-cols-md-8 row-cols-lg-4 text-center">
+                    <div class="book-item">
+                        <div class="book-item-inner">
+                            <div class="image-box">
+                                <img src="/images/books/<%-chosenbook.imageofthebook%>"
+                                    alt="<%-chosenbook.nameofthebook %>" class="img-thumbnail" loading="lazy">
+                            </div>
+                            <h4><a href="/books/<%-chosenbook._id%>"><%- chosenbook.nameofthebook %></a></h4>
+                            <div class="author">
+                                <img src="/images/Authors/<%-chosenbook.author.image %>"
+                                    alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img" loading="lazy">
+                                <span><a href="/author/<%-chosenbook.author._id%>"><%-chosenbook.author.name
+                                            %></a></span>
+                                <span>(6.7)</span>
+                            </div>
+                            <div class="rating-section">
+                                <span class="stars">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                                <span class="review"><%- chosenbook.rating %></span>
+                            </div>
+                            <div class="mt-3"><a href="#" class="btn btn-outline-success"><%-chosenbook.cost %></a>
+                            </div>
+                        </div>
+                    </div>
+                    <% }else{%>
+                        <p class="text-primary">NOT YET?</p>
+
+                        <%} %>
+
+                </div>
+        </section>
+        <footer>
+            <%- include("./partials/footer.ejs") %>
+        </footer>

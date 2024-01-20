@@ -1,0 +1,126 @@
+<!-- tabs-start-section -->
+<!-- tabs-start -->
+<%- include("./partials/tabs.ejs") %>
+    <!-- tabs-end-section -->
+
+
+    <!-- tabs-end-section -->
+
+    <!-- hero-image-section-start -->
+    <section class="hero-img-section">
+        <div class="container-fluid">
+            <div class="hero" style="background-image: url('/images/Authors/<%-authorinfo.image%>');">
+                <div class="row text-center">
+                    <div class="col-md-8 col-md-12 info-title">
+                        <h2>
+                            <%=authorinfo.name%>
+                        </h2>
+                        <div class="social-section">
+                            <span class="socialmedia">
+                                <i class="fab fa-facebook"></i>
+                                <i class="fab fa-instagram"></i>
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- hero-image-section-end -->
+
+    <!-- about-the-author-start -->
+    <section class="author-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-4">
+                    <h2>About the author</h2>
+                    <div class="accordion mb-3" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    history
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <%-authorinfo.biography%>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="accordion mb-3" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapsetwo" aria-expanded="true" aria-controls="collapseOne">
+                                    events and awards
+                                </button>
+                            </h2>
+                            <div id="collapsetwo" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <%const awards=authorinfo.awards[0]%>
+                                        <%if(awards.length> 0){%>
+                                            <%-authorinfo.awards%>
+                                                <%} else{%>
+                                                    <p>No Awards Yet</p>
+                                                    <%}%>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="col-md-12 col-lg-8 text-center other-titles">
+                    <div class="h2 title-2">
+                        <h2> titles by <span><%-authorinfo.name%></span> </h2>
+                    </div>
+                    <div class="container">
+                        <div class="row text-center">
+                            <%if(typeof otherbooks !=='undefined' && otherbooks.length> 0){%>
+                                <%otherbooks.forEach(function(items,index){%>
+                                    <div class="col-md-6 col-lg-4 text-center">
+                                        <div class="book-item">
+                                            <div class="book-item-inner">
+                                                <div class="image-box">
+                                                    <img src="/images/books/<%-items.imageofthebook%>"
+                                                        alt="<%-items.name%>" class="img-thumbnail">
+                                                </div>
+                                                <h4><a href="/books/<%-items._id%>"><%-items.nameofthebook%></a></h4>
+                                                <div class="author">
+                                                    <img src="/images/Authors/<%-items.author.image%>"
+                                                        alt="<%-items.author.name%>" class="author-img">
+                                                    <span><%-items.author.name%></span>
+                                                    <span>(6.7)</span>
+                                                </div>
+                                                <div class="rating-section">
+                                                    <span class="stars">
+                                                        <i class="fas fa-star"></i>
+                                                    </span>
+                                                    <span class="rate"><%-items.rating%></span>
+                                                </div>
+                                                <div class="mt-3"><a href="#" class="btn btn-outline-success">$4.5</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <%})%>
+                                        <%}%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <footer>
+        <%- include("./partials/footer.ejs") %>
+    </footer>
+    <!-- about-the-author-end -->

@@ -1,0 +1,181 @@
+<!-- including tab to the page -->
+
+<%- include('./partials/tabs.ejs') %>
+
+    <section>
+        <div class="container pt-3">
+            <div class="row text-center">
+                <div class="col-md-12 col-lg-12">
+                    <h3 class="display-3" style="text-transform: capitalize; font-weight: 700; font-style: oblique;">
+                        Submit your book</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <% if(infoerrorObj !='' || imageerrorObj !='' || authorbookvalidationObj !='' ){%>
+                        <div class="alert alert-danger" role="alert">
+                            <%- infoerrorObj%>
+                                <%- imageerrorObj%>
+                                    <%- authorbookvalidationObj[0].message%>
+
+                        </div>
+                        <%}%>
+                            <% if(successObj !='' ){%>
+                                <div class="alert alert-success" role="alert">
+                                    <strong><%-successObj%></strong>
+                                </div>
+
+                                <%}%>
+                                    <form action="/submitbook" enctype="multipart/form-data" method="post">
+                                        <div class="row g-3">
+                                            <h4 class="col-12 fw-bold" style="text-transform: capitalize;">Author Info
+                                            </h4>
+                                            <div class="mb-3 col-12">
+                                                <label for="name" class="form-label">Name</label>
+                                                <input type="text" class="form-control" name="name" id="name"
+                                                    aria-describedby="helpId" placeholder="author name" />
+                                            </div>
+                                            <div class="mb-3 col-12">
+                                                <label for="name" class="form-label"><i
+                                                        class="fab fa-twitter"></i></label>
+                                                <input type="text" class="form-control" name="twitter" id="twitter"
+                                                    aria-describedby="helpId" placeholder="twitter account" />
+                                            </div>
+                                            <div class="mb-3 col-12">
+                                                <label for="facebook" class="form-label"><i
+                                                        class="fab fa-facebook"></i></label>
+                                                <input type="text" class="form-control" name="facebook" id="facebook"
+                                                    aria-describedby="helpId" placeholder="facebook" />
+                                            </div>
+                                            <div class="mb-3 col-12">
+                                                <label for="linkedn" class="form-label"><i
+                                                        class="fab fa-linkedin"></i></label>
+                                                <input type="text" class="form-control" name="linkedn" id="linkedn"
+                                                    aria-describedby="helpId" placeholder="linkedn" />
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="biography" class="form-label">Author biography</label>
+                                                <textarea class="form-control" name="biography" id="biography" rows="3"
+                                                    maxlength="300" minlength="10"></textarea>
+                                            </div>
+                                            <div class="mb-3 col-12">
+                                                <label for="awards" class="form-label">Awards</label>
+                                                <div class="awards-list mt-3">
+                                                    <div class="awards">
+                                                        <input type="text" class="form-control" name="awards"
+                                                            id="awards" aria-describedby="helpId"
+                                                            placeholder="awards of the author" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <button class="btn btn-outline-primary" id="addawards" type="button">+
+                                                    awards</button>
+                                            </div>
+
+                                            <div class="mb-3 col-12">
+                                                <label for="authorquotes" class="form-label">Author quotes</label>
+                                                <input type="text" class="form-control" name="authorquotes"
+                                                    id="authorquotes" aria-describedby="helpId"
+                                                    placeholder="authorquotes" />
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="image" class="form-label">Choose file</label>
+                                                <input type="file" class="form-control" name="imageofauthor" id="image32"
+                                                     placeholder="author image"
+                                                    aria-describedby="fileHelpId" />
+
+                                            </div>
+
+                                            <h3 class="fw-bold col-12" style="text-transform: capitalize;">book info
+                                            </h3>
+                                            <div class="mb-3 col-12">
+                                                <label for="nameofthebook" class="form-label">Name of the book</label>
+                                                <input type="text" class="form-control" name="nameofthebook"
+                                                    id="nameofthebook" aria-describedby="helpId"
+                                                    placeholder="Enter the name of the book" />
+                                            </div>
+
+                                            <div class="mb-3 col-12">
+                                                <label for="" class="form-label">Choose file</label>
+                                                <input type="file" class="form-control" name="imageofthebook" id=""
+                                                    placeholder="image of the book" aria-describedby="fileHelpId" />
+
+                                            </div>
+
+                                            <div class="mb-3 col-12">
+                                                <label for="publisher" class="form-label">Publisher</label>
+                                                <input type="text" class="form-control" name="publisher" id="publisher"
+                                                    aria-describedby="helpId" placeholder="publisher" />
+                                            </div>
+                                            <div class="mb-3 col-12">
+                                                <label for="publishingdate" class="form-label">Date</label>
+                                                <input type="date" class="form-control" name="publishingdate"
+                                                    id="publishingdate" aria-describedby="helpId"
+                                                    placeholder="author name" />
+                                            </div>
+                                            <div class="mb-3 col-12">
+                                                <label for="aboutthebook" class="form-label">About the book</label>
+                                                <textarea class="form-control" name="aboutthebook" id=""
+                                                    rows="3"></textarea>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="rating">Rating</label>
+                                                <select name="rating" class="form-select form-control" id="rating">
+                                                    <option selected>select rating</option>
+                                                    <option value=1>1</option>
+                                                    <option value=2>2</option>
+                                                    <option value=3>3</option>
+                                                    <option value=4>4</option>
+                                                    <option value=5>5</option>
+                                                    <option value=6>6</option>
+                                                    <option value=7>7</option>
+                                                    <option value=8>8</option>
+                                                    <option value=9>9</option>
+                                                    <option value=10>10</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <label for="genre"></label>
+                                                <select name="genre" class="form-select form-control" id="genre">
+                                                    <option selected>select genre</option>
+                                                    <option value="fantasy">Fantasy</option>
+                                                    <option value="science fiction">Science fiction</option>
+                                                    <option value="romance">Romance</option>
+                                                    <option value="self-improvement">Self-improvement</option>
+                                                    <option value="crime">Crime</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="review" class="form-label">Review</label>
+                                                <textarea class="form-control" name="review" id="review" rows="3"
+                                                    maxlength="50" placeholder="Enter your review"></textarea>
+                                            </div>
+
+                                            <div class="mb-3 col-12">
+                                                <label for="cost" class="form-label">Cost</label>
+                                                <input type="text" class="form-control" name="cost" id="cost"
+                                                    aria-describedby="helpId" placeholder="cost" />
+                                            </div>
+                                            <div class="col-12">
+                                                <button class="btn btn-outline-success" type="submit">submit
+                                                    book</button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <%- include("./partials/footer.ejs") %>
+    </footer>
