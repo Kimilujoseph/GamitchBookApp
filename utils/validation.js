@@ -128,14 +128,14 @@ const loginAdminValidation = (data) => {
 
 const userSignIn = (userData) => {
     const userSchema = Joi.object({
-        usershema: Joi.string()
+        username: Joi.string()
             .min(2)
             .max(30)
             .required(),
         email: Joi.string()
             .email()
             .required(),
-        passsword: Joi.string()
+        password: Joi.string()
             .min(8)
             .max(30)
             .required(),

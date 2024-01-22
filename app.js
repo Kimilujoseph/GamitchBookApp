@@ -1,5 +1,6 @@
 const express = require('express')
 const route = require('./routes/bookroute')
+const userRoute = require('./routes/userroute')
 const expresslayout = require('express-ejs-layouts')
 const fileupload = require('express-fileupload')
 const session = require('express-session')
@@ -33,5 +34,6 @@ app.use(fileupload())
 app.set('view engine', 'ejs');
 app.set('layout', './layouts/main')
 app.use(route)
+app.use(userRoute)
 
 app.listen(port, () => console.log(`The server is listening on port ${port}`))

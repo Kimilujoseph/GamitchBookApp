@@ -5,7 +5,7 @@ const express = require('express')
 const verifyToken = require('../middleware/authorization')
 const route = express.Router()
 const bookcontroller = require('../controllers/index');
-const usercontroller = require('../controllers/usercontroller')
+
 route.get('/', bookcontroller.homepage);
 route.get('/author/:_id', bookcontroller.authorpage);
 route.get('/books/:_id', bookcontroller.bookpage);
@@ -22,8 +22,5 @@ route.get('/loginAdminPage', bookcontroller.loginAdminPage)
 route.post('/loginAdmin', bookcontroller.loginAdmin)
 route.post('/postcomment/:bookId', verifyToken, bookcontroller.postComment)
 
-//user routes
-route.get('/user/signin', usercontroller.userSignin);
-route.post('/user/signin/post', usercontroller.userSignin);
 
 module.exports = route;

@@ -18,17 +18,18 @@
                         <img src="/images/books/<%-foundbook.imageofthebook %>" alt="<%-foundbook.name%> image"
                             class="img-thumbnail sticky-top" style="top: 20px;" loading="lazy">
                     </div>
-                    <i class="btn btn-success w-100">want to read</i>
+                    <a href="user/preference?name=<%-foundbook._id%>" class="btn btn-success w-80">Add to
+                        favourite</a>
                 </div>
                 <div class="col-md-12 col-lg-5 book-info-section">
-                    
+
                     <div class="accordion" id="accordionExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                     Read more
-                                 </button>
+                                </button>
                             </h2>
                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
@@ -47,7 +48,7 @@
                                         </span>
                                         <span><%-foundbook.rating%></span>
                                     </div>
-                                
+
                                     <hr>
                                     <div class="genre-of-the-book">
                                         <span><i class="fas fa-tags"></i></span>
@@ -79,34 +80,34 @@
                 </div>
                 <div class="col-sm-12 col-lg-3">
                     <h5><%-comment.length%> Reviews & comments</h5>
-                    <%if(comment != ''){%>
+                    <%if(comment !='' ){%>
                         <%comment.forEach((eachComment,index)=>{%>
-                           <div class="container">
-                            <div class="row-cols-2">
-                                <p>by <%-eachComment.userId.username%></p>
+                            <div class="container">
+                                <div class="row-cols-2">
+                                    <p>by <%-eachComment.userId.username%></p>
+                                </div>
+                                <div class="row-cols-12">
+                                    <p><%-eachComment.comment%></p>
+                                </div>
                             </div>
-                            <div class="row-cols-12">
-                                <p><%-eachComment.comment%></p>
-                            </div>
-                           </div>
-                           <hr>
-                        <%})%>
-                        
-                    <%}else{%>
-                     <h5>no comments yet</h5>
-                   <% }%>
-                   <div class="comments">
-                    <form action="/postcomment/<%-foundbook._id%>" method="post">
-                        <div class="mb-3">
-                            <label for="" class="form-label">comment</label>
-                            <textarea class="form-control" name="comment" id="comment"
-                                placeholder="post your comment" rows="3"></textarea>
-                            <button type="submit"
-                                class="btn btn-outline-success btn-sm mt-3">submit</button>
-                        </div>
+                            <hr>
+                            <%})%>
 
-                    </form>
-                </div>
+                                <%}else{%>
+                                    <h5>no comments yet</h5>
+                                    <% }%>
+                                        <div class="comments">
+                                            <form action="/postcomment/<%-foundbook._id%>" method="post">
+                                                <div class="mb-3">
+                                                    <label for="" class="form-label">comment</label>
+                                                    <textarea class="form-control" name="comment" id="comment"
+                                                        placeholder="post your comment" rows="3"></textarea>
+                                                    <button type="submit"
+                                                        class="btn btn-outline-success btn-sm mt-3">submit</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
                 </div>
             </div>
         </div>

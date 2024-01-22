@@ -57,4 +57,4 @@ var bookSchema = new mongoose.Schema({
 bookSchema.index({ nameofthebook: 'text', genre: 'text' })
 
 //Export the model
-module.exports = mongoose.model('books', bookSchema);
+module.exports = mongoose.model('books', bookSchema); 

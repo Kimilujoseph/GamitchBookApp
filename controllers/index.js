@@ -42,8 +42,8 @@ exports.bookpage = async function (req, res) {
     const genre = foundbook.genre;
     const genrefound = await book.find({ "genre": genre }).populate('author');
     const otherbooks = await book.find({}).populate("author").limit(3);
-    const comment = await comments.find({"bookId":books}).sort({_id:-1}).populate("userId")
-    res.render('book', { title: foundbook.nameofthebook, foundbook, genrefound, otherbooks,comment})
+    const comment = await comments.find({ "bookId": books }).sort({ _id: -1 }).populate("userId")
+    res.render('book', { title: foundbook.nameofthebook, foundbook, genrefound, otherbooks, comment })
   }
   catch (error) {
     res.status(500).send({ message: "server error" })
@@ -223,7 +223,6 @@ exports.addNew = async function (req, res) {
       };
 
       await book.insertMany(bookData);
-
       res.status(201)
       req.flash('success', "Book and author successfully inserted")
       req.redirect('/submit')
@@ -248,7 +247,7 @@ exports.addNew = async function (req, res) {
     }
   } catch (error) {
     req.flash('authorbookvalidation', error);
-    return  res.redirect('/submit')
+    return res.redirect('/submit')
   }
 
 };
@@ -281,7 +280,7 @@ exports.addEmail = async (req, res) => {
     res.status(500);
   }
 }
- //handling admin signin
+//handling admin signin
 exports.addAdmin = async function (req, res) {
   const { error } = AdminValidation(req.body);
   if (error) {
@@ -307,7 +306,7 @@ exports.addAdmin = async function (req, res) {
     return res.redirect('/registerAdmin')
   }
 }
- //handling admin login
+//handling admin login
 exports.loginAdmin = async function (req, res) {
   try {
     const { error } = loginAdminValidation(req.body);
@@ -348,7 +347,7 @@ exports.loginAdmin = async function (req, res) {
     }
   }
   catch (error) {
-    res.senddStatus(500)
+    res.status(500)
   }
 
 
@@ -369,9 +368,7 @@ exports.postComment = async function (req, res) {
     }
 
     const comment = await comments.insertMany(userComment)
-    console.log(comment.bookId)
-    const bookComment = await book.updateOne({"_id":userComment.bookId},{$push:{"comments":comment._id}})
-    res.redirect('/books/'+ userComment.bookId)
+    res.redirect('/books/' + userComment.bookId)
 
   }
   catch (error) {

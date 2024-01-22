@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
@@ -15,9 +15,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    preference: {
-        type: Array
-    },
+    favourite: [
+        {
+            type: mongoose.Schema.Types.String,
+            ref: 'books'
+        }
+    ],
     comments: [
         {
             type: mongoose.Schema.Types.ObjectId,
@@ -28,5 +31,6 @@ const userSchema = new mongoose.Schema({
 })
 
 
-const model = mongoose.model('usersCollections', userSchema);
-module.exports = model;
+const userModel = mongoose.model('usersCollection', userSchema);
+
+module.exports = userModel;
