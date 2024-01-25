@@ -10,7 +10,13 @@ require('../model/database')
 const jimp = require('jimp')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
-//the controller to the homepage
+
+/**
+ * @description the controller to the homepage
+ * @param {Object} req - the request object
+ * @param {Object} res - the response object
+ * @returns {void}
+ */
 exports.homepage = async function (req, res) {
   try {
     const limitnumber = 4;
@@ -184,7 +190,13 @@ exports.addNew = async function (req, res) {
         else {
           try {
             const image = await jimp.read(uploadedimagepath)
-            await image.resize(256, 256).quality(80).writeAsync(uploadedimagepath)
+            await image.autocrop()
+              .resize(400, 400)
+              .color([
+                { apply: "lighten", params: [15] },
+              ])
+              .quality(100)
+              .writeAsync(uploadedimagepath)
           }
           catch (error) {
             console.log(error)
@@ -201,7 +213,13 @@ exports.addNew = async function (req, res) {
           try {
             const image = await jimp.read(pathoftheimage);
             //image optimization with jimp methods
-            await image.resize(256, 256).quality(80).writeAsync(pathoftheimage)
+            await image.autocrop().resize(400, 400)
+              .color([{
+                apply: "lighten", params: [10]
+              },
+              ])
+              .quality(100)
+              .writeAsync(pathoftheimage)
           }
           catch (error) {
             console.log(error)

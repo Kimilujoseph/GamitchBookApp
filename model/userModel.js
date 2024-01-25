@@ -15,11 +15,16 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    favourite: [
+
+    refreshToken: {
+        type: String,
+        required: false,
+    },
+
+    userFavourite: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'books',
-            unique: true,
         }
     ],
     comments: [

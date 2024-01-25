@@ -40,6 +40,7 @@ exports.userSignin = async function (req, res) {
     }
     catch (err) {
         res.sendStatus(500)
+        console.error(err.message)
     }
 }
 
@@ -68,18 +69,36 @@ exports.userPage = async function (req, res) {
 exports.preference = async function (req, res) {
     try {
         const user = req.user;
-        console.log(user)
         const favouriteBook = req.query._id;
-        const favouriteExist = await userSchema.find({ _id: user });
-        console.log(favouriteExist)
-        const updatedUser = await userSchema.updateOne({ _id: user }, { $push: { favourite: favouriteBook } })
-        res.json(updatedUser);
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
+        if (!user) {
+            return res.status(401).send("user not authenicated to add favourite")
+        }
 
+        // Check if the book is already in the user's favourites
+        const userFavourites = await userSchema.findById(user).select('userFavourite');
+        const isBookInFavourites = userFavourites.userFavourite.includes(favouriteBook);
+
+        if (!isBookInFavourites) {
+            // Add the book to the user's favourites if it's not already there
+            const updatedUser = await userSchema.findByIdAndUpdate(
+                user,
+                { $push: { userFavourite: favouriteBook } },
+                { new: true }
+            );
+            res.json(updatedUser);
+        } else {
+            res.status(400).send('Book is already in your favourites');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+/**
+ * @description handles user login requests
+ * @param {Object} req - request object
+ * @param {Object} res - response object
+ */
 exports.userLogin = async function (req, res) {
     try {
         const userAuth = {
@@ -103,12 +122,24 @@ exports.userLogin = async function (req, res) {
             }
 
 
-            const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN);
+            const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN, { expiresIn: '30s' });
+            const Refresh_Token = jwt.sign({ _id: userExist._id }, process.env.REFRESH_TOKEN, { expiresIn: '15m' })
+            await userSchema.findByIdAndUpdate(
+                userExist._id,
+                { refreshToken: Refresh_Token },
+                { new: true }
+            );
             //res.json(Access_Token);
             res.cookie('userToken', Access_Token, {
                 httpOnly: true,
                 sameSite: 'strict',
             });
+
+            res.cookie('refresh_token', Refresh_Token, {
+                httpOnly: true,
+                sameSite: 'strict'
+            })
+
             res.redirect('user/userDashboard');
 
         }
