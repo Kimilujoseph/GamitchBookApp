@@ -7,6 +7,7 @@ const admin = require('../model/admin')
 const comments = require('../model/comments')
 const { submissionvalidation, emailValidation, AdminValidation, loginAdminValidation } = require('../utils/validation')
 require('../model/database')
+const jimp = require('jimp')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
 //the controller to the homepage
@@ -175,17 +176,36 @@ exports.addNew = async function (req, res) {
       pathoftheimage = require('path').resolve('./') + '/public/images/books/' + newnamefortheimage;
 
       //write the uploaded image of the author to the server
-      uploadedimageauthor.mv(uploadedimagepath, function (error) {
+      uploadedimageauthor.mv(uploadedimagepath, async function (error) {
         if (error) {
           req.flash('infoerror', "image failed to load")
           return req.redirect('/submit')
         }
+        else {
+          try {
+            const image = await jimp.read(uploadedimagepath)
+            await image.resize(256, 256).quality(80).writeAsync(uploadedimagepath)
+          }
+          catch (error) {
+            console.log(error)
+          }
+        }
       })
 
       //write the uploaded image of the book to the server
-      imageofthebookuploaded.mv(pathoftheimage, function (error) {
+      imageofthebookuploaded.mv(pathoftheimage, async function (error) {
         if (error) {
           return req.flash('infoerror', "book image failed to load")
+        }
+        else {
+          try {
+            const image = await jimp.read(pathoftheimage);
+            //image optimization with jimp methods
+            await image.resize(256, 256).quality(80).writeAsync(pathoftheimage)
+          }
+          catch (error) {
+            console.log(error)
+          }
         }
       })
     }

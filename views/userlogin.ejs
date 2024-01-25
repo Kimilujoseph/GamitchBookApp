@@ -1,0 +1,41 @@
+<%- include('./partials/tabs.ejs') %>
+    <div class="container">
+        <div class="row justify-content-center alighn-items-center">
+            <div class="col-sm-12 col-md-8 col-lg-6">
+                <h3 class="display-5">Login</h3>
+                <%if(infoError !='' ){%>
+                    <div class="alert alert-danger" role="alert">
+                        <strong><%-infoError%></strong>
+                    </div>
+
+                    <%}%>
+
+                        <%if(successObj !='' ){%>
+                            <div class="alert alert-primary" role="alert">
+                                <strong><%- successObj%></strong>
+                            </div>
+
+                            <%}%>
+                                <form action="/user/userLogin/Login" method="post">
+                                    <div class="mb-3">
+                                        <label for="username" class="form-label">username</label>
+                                        <input type="text" class="form-control" name="username" id=""
+                                            aria-describedby="emailHelpId" placeholder="username" />
+
+
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="password" class="form-label">username</label>
+                                        <input type="password" class="form-control" name="password" id=""
+                                            aria-describedby="emailHelpId" placeholder="mypassword@1234" />
+
+
+                                    </div>
+                                    <div class="col-2">
+                                        <button type="submit" class="btn btn-success btn-md">register</button>
+                                    </div>
+
+                                </form>
+            </div>
+        </div>
+    </div>

@@ -64,8 +64,8 @@
                             <div id="collapsetwo" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                                 data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <%const awards=authorinfo.awards[0]%>
-                                        <%if(awards.length> 0){%>
+                                    <%const awards=authorinfo.awards%>
+                                        <%if(awards.length>0){%>
                                             <%-authorinfo.awards%>
                                                 <%} else{%>
                                                     <p>No Awards Yet</p>

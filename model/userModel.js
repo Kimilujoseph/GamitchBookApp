@@ -17,8 +17,9 @@ var userSchema = new mongoose.Schema({
     },
     favourite: [
         {
-            type: mongoose.Schema.Types.String,
-            ref: 'books'
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'books',
+            unique: true,
         }
     ],
     comments: [

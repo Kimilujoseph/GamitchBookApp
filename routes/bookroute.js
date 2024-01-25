@@ -2,7 +2,7 @@
 //it tells the server how to respond to different client requests based on the endpoint and the HTTP request method.
 require('dotenv').config()
 const express = require('express')
-const verifyToken = require('../middleware/authorization')
+const { verifyToken } = require('../middleware/authorization')
 const route = express.Router()
 const bookcontroller = require('../controllers/index');
 
