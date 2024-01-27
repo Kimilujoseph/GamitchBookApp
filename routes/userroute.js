@@ -12,6 +12,7 @@ userRoute.post('/user/userRegister/submit', usercontroller.userSignin)
 userRoute.post('/user/userLogin/Login', usercontroller.userLogin)
 userRoute.get('/user/userregister', usercontroller.userRegister)
 userRoute.get('/user/userlogin', usercontroller.userLoginPage);
+//userRoute.post('/user/userlogin/refreshtoken', usercontroller.refreshToken);
 //route.post('/user/preference/:id', usercontroller.preference)
 
 

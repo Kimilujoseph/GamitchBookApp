@@ -70,9 +70,12 @@ exports.preference = async function (req, res) {
     try {
         const user = req.user;
         const favouriteBook = req.query._id;
-        if (!user) {
+        const userAccessToken = req.userAccessToken
+        if (!userAccessToken) {
             return res.status(401).send("user not authenicated to add favourite")
         }
+
+        console.log('userAccessToken', userAccessToken)
 
         // Check if the book is already in the user's favourites
         const userFavourites = await userSchema.findById(user).select('userFavourite');
@@ -85,6 +88,13 @@ exports.preference = async function (req, res) {
                 { $push: { userFavourite: favouriteBook } },
                 { new: true }
             );
+            if (req.shouldRefreshToken) {
+                res.cookie('userToken', userAccessToken, {
+                    httpOnly: true,
+                    sameSite: 'strict'
+                })
+            }
+
             res.json(updatedUser);
         } else {
             res.status(400).send('Book is already in your favourites');
@@ -122,8 +132,10 @@ exports.userLogin = async function (req, res) {
             }
 
 
-            const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN, { expiresIn: '30s' });
+            const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN, { expiresIn: '1m' });
             const Refresh_Token = jwt.sign({ _id: userExist._id }, process.env.REFRESH_TOKEN, { expiresIn: '15m' })
+            console.log("userToken1", Access_Token)
+            console.log("refreshToken", Refresh_Token)
             await userSchema.findByIdAndUpdate(
                 userExist._id,
                 { refreshToken: Refresh_Token },
@@ -140,7 +152,7 @@ exports.userLogin = async function (req, res) {
                 sameSite: 'strict'
             })
 
-            res.redirect('user/userDashboard');
+            res.json('successfull login');
 
         }
     }
@@ -149,6 +161,31 @@ exports.userLogin = async function (req, res) {
     }
 }
 
+
+// exports.refreshToken = async (req, res) => {
+//     try {
+//         const refreshtoken = req.cookies.refresh_token;
+
+//         if (!refreshtoken) {
+//             return res.status(401).send('No refresh token found')
+//         }
+//         const verifiedUser = jwt.verify(refreshtoken, process.env.REFRESH_TOKEN);
+//         const userFound = await userSchema.findById(verifiedUser._id).select("refreshToken");
+//         if (userFound.refreshToken !== refreshtoken) {
+//             return res.status(403).send("tampered token")
+//         }
+//         const Access_Token = jwt.sign({ _id: userFound._id }, process.env.USER_SECRET_TOKEN);
+//         res.cookie('userToken', Access_Token,
+//             {
+//                 httpOnly: true,
+//                 sameSite: 'strict'
+//             }
+//         )
+//     }
+//     catch (error) {
+//         consolse.error(error.message);
+//     }
+// }
 
 exports.userDashboard = async (req, res) => {
     res.render("userpage", { title: "userpage" })

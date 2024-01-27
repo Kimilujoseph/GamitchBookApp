@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const userSchema = require('../model/userModel')
 const verifyToken = async (req, res, next) => {
     const token = req.cookies.jwtToken;
-    console.log(token)
+    console.log("token", token)
     if (token) {
         jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, (error, decoded) => {
             if (error) {
@@ -21,65 +21,58 @@ const verifyToken = async (req, res, next) => {
 
 const verifyUser = async (req, res, next) => {
     const userToken = req.cookies.userToken;
-    console.log(userToken);
+
     if (userToken) {
-        jwt.verify(userToken, process.env.USER_SECRET_TOKEN, (error, decoded) => {
-            if (error) {
-                if (error.name === "TokenExpiredError") {
-                    req.verifyRefreshToken = true;
-                    next()
-                }
-                else {
-                    return res.status(403).send('Token Tampered');
-                }
-            }
-            else {
+        try {
+            const decoded = jwt.verify(userToken, process.env.USER_SECRET_TOKEN);
+
+            if (req.verifyRefreshToken && req.cookies.refresh_token) {
+                await verifyUser.Refresh_Token(req, res, next);
+            } else {
                 req.user = decoded;
-                next()
+                next();
             }
-        })
-    }
-    else {
-        res.status(401).send('please  login')
+        } catch (error) {
+            console.error(error);
+            res.status(403).send('Token Tampered');
+        }
+    } else {
+        res.status(401).send('Please log in');
     }
 };
 
-/**
-* @description verifies the user's refresh token and returns an access token
-* @param {Object} req - the request object
-* @param {Object} res - the response object
-*/
-verifyUser.Refresh_Token = async function (req, res) {
+verifyUser.Refresh_Token = async (req, res, next) => {
     const refreshToken = req.cookies.refresh_token;
-    console.log(refreshToken);
+
     if (refreshToken) {
         try {
-            const decoded = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
-            if (!decoded) {
-                return res.status(403).send("token tampered");
-            }
-            const user = await userSchema.findById(decoded._id);
-            if (!user || user.refreshToken) {
-                return res.status(403).send("token tampered");
-            }
+            const verifyUser =  jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
 
-            const Access_Token = jwt.sign({ _id: user._id }, process.env.USER_SECRET_TOKEN, { expiresIn: '15m' });
+            if (!verifyUser) {
+                res.status(403).send("Refresh token has expired");
+            } else {
+                const user = await userSchema.findById(verifyUser._id).select("refreshToken");
 
-            res.cookie('userToken', Access_Token,
-                {
-                    httpOnly: true,
-                    sameSite: 'strict'
-                })
+                if (!user || user.refreshToken !== refreshToken) {
+                    res.status(403).send("Refresh token tampered");
+                } else {
+                    const Access_Token = jwt.sign({ _id: user._id }, process.env.USER_SECRET_TOKEN);
+                    req.userAccessToken = Access_Token;
+                    req.shouldRefreshToken = true;
+                    next();
+                }
+            }
         } catch (error) {
-            console.log("Refresh token:", error)
-            res.json('Error  refreshing token')
+            console.error(error);
+            req.shouldRefreshToken = false;
+            res.status(401).send("Error refreshing token");
         }
-    }
-    else {
-        res.json("Refresh token not found")
+    } else {
+        res.status(401).send("Refresh token not found");
     }
 };
 
+module.exports = verifyUser;
 
 module.exports.verifyToken = verifyToken;
 module.exports.verifyUser = verifyUser;
