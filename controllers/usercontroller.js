@@ -70,12 +70,18 @@ exports.preference = async function (req, res) {
     try {
         const user = req.user;
         const favouriteBook = req.query._id;
-        const userAccessToken = req.userAccessToken
-        if (!userAccessToken) {
-            return res.status(401).send("user not authenicated to add favourite")
+        const userAccessToken = req.userAccessToken;
+        console.log("userAccessToken", userAccessToken)
+        if (!user) {
+            if (req.shouldRefreshToken) {
+                res.cookie('userToken', userAccessToken, {
+                    httpOnly: true,
+                    sameSite: 'strict'
+                })
+            }
         }
 
-        console.log('userAccessToken', userAccessToken)
+        //console.log('userAccessToken', userAccessToken)
 
         // Check if the book is already in the user's favourites
         const userFavourites = await userSchema.findById(user).select('userFavourite');
@@ -88,12 +94,6 @@ exports.preference = async function (req, res) {
                 { $push: { userFavourite: favouriteBook } },
                 { new: true }
             );
-            if (req.shouldRefreshToken) {
-                res.cookie('userToken', userAccessToken, {
-                    httpOnly: true,
-                    sameSite: 'strict'
-                })
-            }
 
             res.json(updatedUser);
         } else {

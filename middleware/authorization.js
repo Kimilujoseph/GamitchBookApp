@@ -24,17 +24,24 @@ const verifyUser = async (req, res, next) => {
 
     if (userToken) {
         try {
-            const decoded = jwt.verify(userToken, process.env.USER_SECRET_TOKEN);
+            jwt.verify(userToken, process.env.USER_SECRET_TOKEN, async (error, decoded) => {
+                if (error) {
+                    if (error.name === "TokenExpiredError") {
+                        req.verifyRefreshToken = true;
+                        if (req.verifyRefreshToken && req.cookies.refresh_token) {
+                            await verifyUser.Refresh_Token(req, res, next)
+                        }
+                    }
+                }
+                else {
+                    req.user = decoded;
+                    next()
+                }
+            });
 
-            if (req.verifyRefreshToken && req.cookies.refresh_token) {
-                await verifyUser.Refresh_Token(req, res, next);
-            } else {
-                req.user = decoded;
-                next();
-            }
+
         } catch (error) {
-            console.error(error);
-            res.status(403).send('Token Tampered');
+            console.error("token creation", error)
         }
     } else {
         res.status(401).send('Please log in');
@@ -46,7 +53,7 @@ verifyUser.Refresh_Token = async (req, res, next) => {
 
     if (refreshToken) {
         try {
-            const verifyUser =  jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
+            const verifyUser = jwt.verify(refreshToken, process.env.REFRESH_TOKEN);
 
             if (!verifyUser) {
                 res.status(403).send("Refresh token has expired");
@@ -58,6 +65,7 @@ verifyUser.Refresh_Token = async (req, res, next) => {
                 } else {
                     const Access_Token = jwt.sign({ _id: user._id }, process.env.USER_SECRET_TOKEN);
                     req.userAccessToken = Access_Token;
+                    console.log("UserRefresh", Access_Token)
                     req.shouldRefreshToken = true;
                     next();
                 }
