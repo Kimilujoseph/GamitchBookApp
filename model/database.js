@@ -3,15 +3,15 @@ const mongoose = require('mongoose');
 require("../model/Author")
 require("../model/Book")
 
-async function run() {
-   try {
-      await mongoose.connect(process.env.CONNECT_MONGO)
-      console.log('The database is connected')
-   }
-   catch (error) {
-      console.log(error)
-   }
-}
-run()
+const mongoose = require('mongoose');
+
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+const db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+   console.log('Connected to MongoDB');
+});
 
 

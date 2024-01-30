@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const route = require('./routes/bookroute')
 const userRoute = require('./routes/userroute')
@@ -6,10 +8,10 @@ const fileupload = require('express-fileupload')
 const session = require('express-session')
 const flash = require('connect-flash')
 const cookieparser = require('cookie-parser')
-const dotenv = require('dotenv')
+
 const app = express();
 const port = process.env.PORT || 4500;
-dotenv.config()
+
 //used to parse the req.body
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
