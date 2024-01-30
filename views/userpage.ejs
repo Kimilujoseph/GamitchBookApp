@@ -1,26 +1,35 @@
 <%- include('./partials/tabs.ejs') %>
 
-    //user identification
 
     <section>
 
         <body>
             <div class="container">
-                <h1>[User Name]'s Favorite Books</h1>
-                <div class="row">
-                    <div class="col-sm-6 col-md-4 mb-3" for="book-1">
-                        <div class="card">
-                            <img src="[Book Image URL]" class="card-img-top" alt="[Book Title]">
-                            <div class="card-body">
-                                <h5 class="card-title">[Book Title]</h5>
-                                <p class="card-text">[Short book description]</p>
-                                <a href="#" class="btn btn-primary">Read More</a>
-                            </div>
-                            <div class="card-footer">
-                                <small class="text-muted">[Comment about the book]</small>
+                <h1><%-userFound.username%> Favorite Books</h1>
+
+                <div class="row" style="display: flex; flex-wrap: wrap;">
+                    <%userFavourite.forEach(function(book,index){%>
+                        <div class="col-sm-6 col-md-4 mb-3" for="book-1">
+                            <div class="card">
+                                <img src="/images/books/<%-book.imageofthebook%>" class="card-img-top"
+                                    alt="[Book Title]">
+                                <div class="card-body">
+                                    <h5 class="card-title"><%-book.nameofthebook%></h5>
+                                    <p class="card-text"><%-book.aboutthebook%></p>
+                                </div>
+                                <div class="card-footer">
+
+                                    <div class="rating-section">
+                                        <span class="stars">
+                                            <i class="fas fa-star"></i>
+                                        </span>
+                                        <span class="review"><%-book.rating %></span>
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <%})%>
                 </div>
             </div>
         </body>

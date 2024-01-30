@@ -58,12 +58,13 @@ verifyUser.Refresh_Token = async (req, res, next) => {
             if (!verifyUser) {
                 res.status(403).send("Refresh token has expired");
             } else {
-                const user = await userSchema.findById(verifyUser._id).select("refreshToken");
+                const user = await userSchema.findById(verifyUser._id);
+                console.log(user)
 
                 if (!user || user.refreshToken !== refreshToken) {
                     res.status(403).send("Refresh token tampered");
                 } else {
-                    const Access_Token = jwt.sign({ _id: user._id }, process.env.USER_SECRET_TOKEN);
+                    const Access_Token = jwt.sign({ _id: user._id }, process.env.USER_SECRET_TOKEN, { expiresIn: '1m' });
                     req.userAccessToken = Access_Token;
                     console.log("UserRefresh", Access_Token)
                     req.shouldRefreshToken = true;
@@ -73,10 +74,10 @@ verifyUser.Refresh_Token = async (req, res, next) => {
         } catch (error) {
             console.error(error);
             req.shouldRefreshToken = false;
-            res.status(401).send("Error refreshing token");
+            res.status(401).send("Please login to verify account");
         }
     } else {
-        res.status(401).send("Refresh token not found");
+        res.status(401).send("please login to verify the user");
     }
 };
 

@@ -1,6 +1,7 @@
 require('dotenv').config()
 require('../model/database');
 const userSchema = require('../model/userModel')
+const comments = require('../model/comments')
 const { userSignIn } = require('../utils/validation')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken')
@@ -70,16 +71,16 @@ exports.preference = async function (req, res) {
     try {
         const user = req.user;
         const favouriteBook = req.query._id;
-        const userAccessToken = req.userAccessToken;
-        console.log("userAccessToken", userAccessToken)
-        if (!user) {
-            if (req.shouldRefreshToken) {
-                res.cookie('userToken', userAccessToken, {
-                    httpOnly: true,
-                    sameSite: 'strict'
-                })
-            }
-        }
+        // const userAccessToken = req.userAccessToken;
+        //console.log("userAccessToken", userAccessToken)
+        // if (!user) {
+        //     if (req.shouldRefreshToken) {
+        //         res.cookie('userToken', userAccessToken, {
+        //             httpOnly: true,
+        //             sameSite: 'strict'
+        //         })
+        //     }
+        // }
 
         //console.log('userAccessToken', userAccessToken)
 
@@ -132,7 +133,7 @@ exports.userLogin = async function (req, res) {
             }
 
 
-            const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN, { expiresIn: '1m' });
+            const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN);
             const Refresh_Token = jwt.sign({ _id: userExist._id }, process.env.REFRESH_TOKEN, { expiresIn: '15m' })
             console.log("userToken1", Access_Token)
             console.log("refreshToken", Refresh_Token)
@@ -152,7 +153,7 @@ exports.userLogin = async function (req, res) {
                 sameSite: 'strict'
             })
 
-            res.json('successfull login');
+            res.redirect('/user/userDashboard');
 
         }
     }
@@ -188,6 +189,13 @@ exports.userLogin = async function (req, res) {
 // }
 
 exports.userDashboard = async (req, res) => {
-    res.render("userpage", { title: "userpage" })
-    //res.json("User accessed");
+    try {
+        const user = req.user;
+        const userFound = await userSchema.findOne({ _id: user._id }, { username: 1, userfavourite: 1 }).populate("userFavourite");
+        const userFavourite = userFound.userFavourite;
+        res.render("userpage", { title: "userpage", userFound, userFavourite, numberofcomments })
+    }
+    catch (error) {
+
+    }
 }             
