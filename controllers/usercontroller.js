@@ -12,7 +12,7 @@ exports.userRegister = async function (req, res) {
         res.render('userRegister', { title: "signin", infoError });
     }
     catch (error) {
-        console.log(error)
+        res.status(500).send("Internal server error")
     }
 }
 
@@ -52,7 +52,7 @@ exports.userLoginPage = async function (req, res) {
         res.render('userlogin', { title: 'userlogin', successObj, infoError });
     }
     catch (error) {
-        res.sendStatus(500)
+        res.sendStatus(500).send("Internal server error")
 
     }
 }
@@ -63,7 +63,7 @@ exports.userPage = async function (req, res) {
 
     }
     catch (error) {
-        res.status(500);
+        res.status(500).send("internal server error");
     }
 }
 
@@ -101,7 +101,7 @@ exports.preference = async function (req, res) {
             res.status(400).send('Book is already in your favourites');
         }
     } catch (error) {
-        console.log(error);
+        res.status(500).send("Internal server error")
     }
 };
 
@@ -135,8 +135,7 @@ exports.userLogin = async function (req, res) {
 
             const Access_Token = jwt.sign({ _id: userExist._id }, process.env.USER_SECRET_TOKEN);
             const Refresh_Token = jwt.sign({ _id: userExist._id }, process.env.REFRESH_TOKEN, { expiresIn: '15m' })
-            console.log("userToken1", Access_Token)
-            console.log("refreshToken", Refresh_Token)
+
             await userSchema.findByIdAndUpdate(
                 userExist._id,
                 { refreshToken: Refresh_Token },
@@ -158,7 +157,7 @@ exports.userLogin = async function (req, res) {
         }
     }
     catch (error) {
-        console.log(error)
+        res.status(500).send("internal server error")
     }
 }
 
