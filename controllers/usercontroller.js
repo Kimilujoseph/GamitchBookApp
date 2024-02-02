@@ -34,14 +34,21 @@ exports.userSignin = async function (req, res) {
             password: hashedPassword
         }
 
-        await userSchema.insertMany(userData);
-        req.flash('successObj', 'successfully signed in');
-        res.redirect('/user/userlogin')
+        //check if the user already exist
+        const userExist = await userSchema.findOne({ "username": userData.username })
+        if (!userExist) {
+            await userSchema.insertMany(userData);
+            req.flash('successObj', 'successfully signed in');
+            res.redirect('/user/userlogin')
+        }
+        else {
+            req.flash("infoErrorObj", "user or email email exist");
+            res.redirect('/user/userregister')
+        }
 
     }
     catch (err) {
-        res.sendStatus(500)
-        console.error(err.message)
+        res.status(500).send("Internal server error")
     }
 }
 
@@ -95,10 +102,11 @@ exports.preference = async function (req, res) {
                 { $push: { userFavourite: favouriteBook } },
                 { new: true }
             );
-
-            res.json(updatedUser);
+            req.flash("successObj", "Book successfully added");
+            res.redirect('/user/userDashboard');
         } else {
-            res.status(400).send('Book is already in your favourites');
+            req.flash("infoErrorObj", "Book already in your in your favourite");
+            res.redirect("/user/userDashboard")
         }
     } catch (error) {
         res.status(500).send("Internal server error")
@@ -189,12 +197,14 @@ exports.userLogin = async function (req, res) {
 
 exports.userDashboard = async (req, res) => {
     try {
+        const successObj = req.flash('successObj')
+        const infoError = req.flash('infoErrorObj')
         const user = req.user;
         const userFound = await userSchema.findOne({ _id: user._id }, { username: 1, userfavourite: 1 }).populate("userFavourite");
         const userFavourite = userFound.userFavourite;
-        res.render("userpage", { title: "userpage", userFound, userFavourite, numberofcomments })
+        res.render("userpage", { title: "userpage", userFound, userFavourite, successObj, infoError })
     }
     catch (error) {
-
+        return res.status(500).send("internal server error")
     }
 }             

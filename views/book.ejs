@@ -79,35 +79,41 @@
 
                 </div>
                 <div class="col-sm-12 col-lg-3">
-                    <h5><%-comment.length%> Reviews & comments</h5>
-                    <%if(comment !='' ){%>
-                        <%comment.forEach((eachComment,index)=>{%>
-                            <div class="container">
-                                <div class="row-cols-2">
-                                    <p>by <%-eachComment.userId.username%></p>
-                                </div>
-                                <div class="row-cols-12">
-                                    <p><%-eachComment.comment%></p>
-                                </div>
-                            </div>
-                            <hr>
-                            <%})%>
+                    <%if(infoerrorObj !='' ){%>
+                        <div class="alert alert-danger" role="alert">
+                            <strong><%-infoerrorObj%></strong>
+                        </div>
 
-                                <%}else{%>
-                                    <h5>no comments yet</h5>
-                                    <% }%>
-                                        <div class="comments">
-                                            <form action="/postcomment/<%-foundbook._id%>" method="post">
-                                                <div class="mb-3">
-                                                    <label for="" class="form-label">comment</label>
-                                                    <textarea class="form-control" name="comment" id="comment"
-                                                        placeholder="post your comment" rows="3"></textarea>
-                                                    <button type="submit"
-                                                        class="btn btn-outline-success btn-sm mt-3">submit</button>
-                                                </div>
-
-                                            </form>
+                        <%}%>
+                            <h5><%-comment.length%> Reviews & comments</h5>
+                            <%if(comment !='' ){%>
+                                <%comment.forEach((eachComment,index)=>{%>
+                                    <div class="container">
+                                        <div class="row-cols-2">
+                                            <p>by <%-eachComment.userId.username%></p>
                                         </div>
+                                        <div class="row-cols-12">
+                                            <p><%-eachComment.comment%></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <%})%>
+
+                                        <%}else{%>
+                                            <h5>no comments yet</h5>
+                                            <% }%>
+                                                <div class="comments">
+                                                    <form action="/postcomment/<%-foundbook._id%>" method="post">
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">comment</label>
+                                                            <textarea class="form-control" name="comment" id="comment"
+                                                                placeholder="post your comment" rows="3"></textarea>
+                                                            <button type="submit"
+                                                                class="btn btn-outline-success btn-sm mt-3">submit</button>
+                                                        </div>
+
+                                                    </form>
+                                                </div>
                 </div>
             </div>
         </div>

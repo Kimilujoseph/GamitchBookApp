@@ -2,7 +2,7 @@
 //it tells the server how to respond to different client requests based on the endpoint and the HTTP request method.
 require('dotenv').config()
 const express = require('express')
-const { verifyToken } = require('../middleware/authorization')
+const { verifyToken, verifyUser } = require('../middleware/authorization')
 const route = express.Router()
 const bookcontroller = require('../controllers/index');
 
@@ -20,7 +20,7 @@ route.post('/submitemail', bookcontroller.addEmail)
 route.post('/registerAdmin', bookcontroller.addAdmin)
 route.get('/loginAdminPage', bookcontroller.loginAdminPage)
 route.post('/loginAdmin', bookcontroller.loginAdmin)
-route.post('/postcomment/:bookId', verifyToken, bookcontroller.postComment)
+route.post('/postcomment/:bookId', verifyUser, bookcontroller.postComment)
 
 
 module.exports = route;

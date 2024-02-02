@@ -11,16 +11,16 @@ const comments = new mongoose.Schema({
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'admin'
+        ref: 'usersCollection'
     },
-    date:{
-        type:Date,
-        required:true,
-        default:Date.now,
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now,
     }
 })
 
-comments.index({userId:"text"})
+comments.index({ userId: "text" })
 const commentModel = mongoose.model('commentCollection', comments);
 
 module.exports = commentModel;

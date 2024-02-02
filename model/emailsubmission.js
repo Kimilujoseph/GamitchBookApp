@@ -4,6 +4,10 @@ const emailSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true
+    },
+    date: {
+        type: String,
+        default: Date.now
     }
 })
 

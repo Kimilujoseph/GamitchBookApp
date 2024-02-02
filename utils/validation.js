@@ -144,8 +144,28 @@ const userSignIn = (userData) => {
     return userSchema.validate(userData)
 }
 
+const userComment = (userComment) => {
+    const commentSchema = Joi.object({
+        comment: Joi.string()
+            .min(2)
+            .max(30)
+            .required(),
+        bookId: Joi.string()
+            .min(2)
+            .required(),
+        userId: Joi.string()
+            .min()
+            .required(),
+        date: Joi.date()
+            .required()
+
+    })
+    return commentSchema.validate(userComment);
+}
+
 module.exports.submissionvalidation = submissionvalidation;
 module.exports.emailValidation = emailValidation;
 module.exports.AdminValidation = AdminValidation;
 module.exports.loginAdminValidation = loginAdminValidation;
 module.exports.userSignIn = userSignIn;
+module.exports.userComment = userComment;

@@ -5,7 +5,7 @@ const author = require('../model/Author')
 const email = require('../model/emailsubmission')
 const admin = require('../model/admin')
 const comments = require('../model/comments')
-const { submissionvalidation, emailValidation, AdminValidation, loginAdminValidation } = require('../utils/validation')
+const { submissionvalidation, emailValidation, AdminValidation, loginAdminValidation, userComment } = require('../utils/validation')
 require('../model/database')
 const jimp = require('jimp')
 const bcrypt = require('bcryptjs');
@@ -50,7 +50,8 @@ exports.bookpage = async function (req, res) {
     const genrefound = await book.find({ "genre": genre }).populate('author');
     const otherbooks = await book.find({}).populate("author").limit(3);
     const comment = await comments.find({ "bookId": books }).sort({ _id: -1 }).populate("userId")
-    res.render('book', { title: foundbook.nameofthebook, foundbook, genrefound, otherbooks, comment })
+    const infoerrorObj = req.flash('infoerror')
+    res.render('book', { title: foundbook.nameofthebook, foundbook, genrefound, otherbooks, comment, infoerrorObj })
   }
   catch (error) {
     res.status(500).send({ message: "server error" })
@@ -95,7 +96,7 @@ exports.submitpage = async function (req, res) {
     res.render("submitpage", { title: "submit", infoerrorObj, successObj, imageerrorObj, authorbookvalidationObj })
   }
   catch (error) {
-    res.status(500).send(error.message)
+    res.status(500).send("internal server error")
   }
 }
 
@@ -107,7 +108,7 @@ exports.emailpage = async function (req, res) {
     res.render("signemail", { title: "email page", infoerrorObj, successObj })
   }
   catch (error) {
-    res.json(error).send(error)
+    res.json(error).send("internal server error")
   }
 }
 
@@ -174,7 +175,6 @@ exports.addNew = async function (req, res) {
       uploadedimageauthor = req.files.imageofauthor;
       newnameoftheimage = Date.now() + uploadedimageauthor.name;  //we will have a unique name for the image
       uploadedimagepath = require('path').resolve('./') + '/public/images/Authors/' + newnameoftheimage;
-      console.log(newnameoftheimage)
 
       //handling the image of the book
       imageofthebookuploaded = req.files.imageofthebook;
@@ -193,13 +193,13 @@ exports.addNew = async function (req, res) {
             await image.autocrop()
               .resize(400, 400)
               .color([
-                { apply: "lighten", params: [15] },
+                { apply: "lighten", params: [10] },
               ])
-              .quality(100)
+
               .writeAsync(uploadedimagepath)
           }
           catch (error) {
-            console.log(error)
+            res.status(500).send("Internal server error")
           }
         }
       })
@@ -222,7 +222,7 @@ exports.addNew = async function (req, res) {
               .writeAsync(pathoftheimage)
           }
           catch (error) {
-            console.log(error)
+            res.status(500).send("internal server error")
           }
         }
       })
@@ -398,6 +398,7 @@ exports.loginAdmin = async function (req, res) {
 
 exports.postComment = async function (req, res) {
   try {
+    // const { error } = userComment(userComment);
 
     const userComment = {
       bookId: req.params.bookId,
@@ -405,12 +406,13 @@ exports.postComment = async function (req, res) {
       comment: req.body.comment
     }
 
-    const comment = await comments.insertMany(userComment)
+    console.log("userID", userComment.userId)
+    await comments.insertMany(userComment)
     res.redirect('/books/' + userComment.bookId)
 
   }
   catch (error) {
-    console.log(error.message)
+    res.status(500).send("submit cannot be empty")
   }
 }
 

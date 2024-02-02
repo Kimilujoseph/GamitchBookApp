@@ -5,31 +5,51 @@
 
         <body>
             <div class="container">
+                <div class="row cols-2 col-md-8 col-lg-6 justify-content-center alighn-items-center">
+                    <%if(infoError !='' ){%>
+                        <div class="alert alert-danger" role="alert">
+                            <strong><%-infoError%></strong>
+                        </div>
+
+                        <%}%>
+
+                            <%if(successObj !='' ){%>
+                                <div class="alert alert-primary" role="alert">
+                                    <strong><%- successObj%></strong>
+                                </div>
+
+                                <%}%>
+                </div>
                 <h1><%-userFound.username%> Favorite Books</h1>
 
                 <div class="row" style="display: flex; flex-wrap: wrap;">
-                    <%userFavourite.forEach(function(book,index){%>
-                        <div class="col-sm-6 col-md-4 mb-3" for="book-1">
-                            <div class="card">
-                                <img src="/images/books/<%-book.imageofthebook%>" class="card-img-top"
-                                    alt="[Book Title]">
-                                <div class="card-body">
-                                    <h5 class="card-title"><%-book.nameofthebook%></h5>
-                                    <p class="card-text"><%-book.aboutthebook%></p>
-                                </div>
-                                <div class="card-footer">
-
-                                    <div class="rating-section">
-                                        <span class="stars">
-                                            <i class="fas fa-star"></i>
-                                        </span>
-                                        <span class="review"><%-book.rating %></span>
+                    <%if(userFavourite !='' ){%>
+                        <%userFavourite.forEach(function(book,index){%>
+                            <div class="col-sm-6 col-md-4 mb-3" for="book-1">
+                                <div class="card">
+                                    <img src="/images/books/<%-book.imageofthebook%>" class="card-img-top"
+                                        alt="<%-book.imageofthebook%>">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><%-book.nameofthebook%></h5>
+                                        <p class="card-text"><%-book.aboutthebook%></p>
                                     </div>
+                                    <div class="card-footer">
 
+                                        <div class="rating-section">
+                                            <span class="stars">
+                                                <i class="fas fa-star"></i>
+                                            </span>
+                                            <span class="review"><%-book.rating %></span>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <%})%>
+                            <%})%>
+
+                                <%}else{%>
+                                    <p>User favourite not yet added</p>
+                                    <%}%>
                 </div>
             </div>
         </body>

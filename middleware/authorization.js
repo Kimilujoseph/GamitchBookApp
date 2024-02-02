@@ -2,8 +2,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const userSchema = require('../model/userModel')
 const verifyToken = async (req, res, next) => {
-    const token = req.cookies.jwtToken;
-    console.log("token", token)
+    const token = req.cookies.jwtToken
     if (token) {
         jwt.verify(token, process.env.ACCESS_SECRET_TOKEN, (error, decoded) => {
             if (error) {
