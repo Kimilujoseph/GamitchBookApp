@@ -8,9 +8,19 @@ const fileupload = require('express-fileupload')
 const session = require('express-session')
 const flash = require('connect-flash')
 const cookieparser = require('cookie-parser')
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 const app = express();
 const port = process.env.PORT || 4500;
+
+const store = new MongoDBStore({
+    uri: 'MONGODB_URI', // replace with your MongoDB URI
+    collection: 'sessions',
+})
+
+store.on('error', function (error) {
+    console.error(error);
+});
 
 //used to parse the req.body
 app.use(express.json())
