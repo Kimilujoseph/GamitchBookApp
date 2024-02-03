@@ -14,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 4500;
 
 const store = new MongoDBStore({
-    uri: 'MONGODB_URI', // replace with your MongoDB URI
+    uri: process.env.MONGODB_URI, // replace with your MongoDB URI
     collection: 'sessions',
 })
 
