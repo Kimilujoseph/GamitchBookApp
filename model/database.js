@@ -10,7 +10,7 @@ const connect = async function () {
       await mongoose.connect(process.env.MONGODB_URI);
       console.log("Connected to MongoDB Atlas");
    } catch (error) {
-      console.log("You're offline");
+      console.log("It seems you are offline");
       process.exit(1);
    }
 }
