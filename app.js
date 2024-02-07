@@ -14,9 +14,9 @@ const app = express();
 const port = process.env.PORT || 4500;
 
 const store = new MongoDBStore({
-    uri: process.env.MONGODB_URI, // replace with your MongoDB URI
+    uri: process.env.MONGODB_URI,
     collection: 'sessions',
-})
+});
 
 store.on('error', function (error) {
     console.error(error);
@@ -35,9 +35,10 @@ app.use(expresslayout);
 app.use(cookieparser('BookBlogSecure'));
 app.use(session({
     secret: 'bookblogsecretSession',
+    resave: false,
     saveUninitialized: true,
-    resave: true
-}))
+    store: store, // Set the store option explicitly
+}));
 app.use(flash())
 app.use(fileupload())
 
