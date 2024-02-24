@@ -23,7 +23,7 @@ const submissionvalidation = (data) => {
 
         biography: Joi.string()
             .min(5)
-            .max(300)
+            .max(500)
             .required(),
 
         awards: Joi.string()

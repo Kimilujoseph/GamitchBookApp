@@ -1,0 +1,47 @@
+<%- include('./partials/tabs.ejs') %>
+
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-sm-4 col-md-6 col-lg-6">
+                    <h1>Post your blog</h1>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-8 col-lg-8">
+                    <form action="/submitbolog" enctype="multipart/form-data" method="post">
+                        <div class="mb-3 col-12">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" id="name" aria-describedby="helpId"
+                                placeholder="author name" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="blogpost" class="form-label">Author blog</label>
+                            <textarea class="form-control" name="blog" id="blog" rows="10" maxlength="500"
+                                minlength="10"></textarea>
+                        </div>
+                        <div class="mb-3 col-12">
+                            <label for="" class="form-label">Choose file</label>
+                            <input type="file" class="form-control" name="imageoftheblog" id="imageoftheblog"
+                                placeholder="image of  your blog" aria-describedby="fileHelpId" />
+
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-outline-success" type="submit">submit
+                                book</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <%- include("./partials/footer.ejs") %>
+    </footer>

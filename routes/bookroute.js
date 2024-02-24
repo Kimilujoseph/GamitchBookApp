@@ -21,6 +21,7 @@ route.post('/registerAdmin', bookcontroller.addAdmin)
 route.get('/loginAdminPage', bookcontroller.loginAdminPage)
 route.post('/loginAdmin', bookcontroller.loginAdmin)
 route.post('/postcomment/:bookId', verifyUser, bookcontroller.postComment)
+route.get("/blogpost", bookcontroller.blogPost)
 
 
 module.exports = route;

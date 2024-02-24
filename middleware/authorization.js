@@ -40,7 +40,7 @@ const verifyUser = async (req, res, next) => {
 
 
         } catch (error) {
-            console.error("token creation", error)
+            res.status(403).sendStatus("forbidden")
         }
     } else {
         res.status(401).send('Please log in');

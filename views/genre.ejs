@@ -5,7 +5,7 @@
 
 
     <!-- book-section-start -->
-    <% if(genrefound !=''){ %>
+    <% if(genrefound !='' ){ %>
         <div class="container mt-3">
             <div class="row">
                 <div class="col-md-12 col-lg-4 text-center">
@@ -20,11 +20,11 @@
             </div>
         </div>
         <section class="book-section">
-            <div class="container">
-                <div class="row row-cols-8 row-cols-md-8 row-cols-lg-4 text-center">
+            <div class="container-fluid">
+                <div class="row text-center">
 
                     <%genrefound.forEach(function(item,index){%>
-                        <div class="book-item">
+                        <div class="book-item col-6 col-sm-6 col-md-4 col-lg-3">
                             <div class="book-item-inner">
                                 <div class="image-box">
                                     <img src="/images/books/<%-item.imageofthebook%>" alt="<%-item.name %>"
@@ -35,7 +35,7 @@
                                     <img src="/images/Authors/<%-item.author.image %>"
                                         alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img" loading="lazy">
                                     <span><a href="/author/<%-item.author._id%>"><%-item.author.name %></a></span>
-                                    <span>(6.7)</span>
+
                                 </div>
                                 <div class="rating-section">
                                     <span class="stars">

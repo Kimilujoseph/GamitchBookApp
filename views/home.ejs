@@ -79,7 +79,6 @@
                                     <img src="/images/Authors/<%-item.author.image %>"
                                         alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img" loading="lazy">
                                     <span><a href="/author/<%-item.author._id %>"><%-item.author.name %></a></span>
-                                    <span>(6.7)</span>
                                 </div>
                                 <div class="rating-section">
                                     <span class="stars">
@@ -123,7 +122,7 @@
                             loading="lazy">
                     </div>
                     <div id="carouselOne" class="carousel slide pt-4 text-center" data-bs-ride="carousel">
-                        <%if(typeof authorlist !=="undefined" && authorlist.length>0){%>
+                        <%if(typeof authorlist !="undefined" && authorlist.length>0){%>
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active"
                                     js-img-attribute="/images/Authors/<%-authorlist[0].image%>">

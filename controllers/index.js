@@ -20,7 +20,7 @@ const jwt = require('jsonwebtoken')
 exports.homepage = async function (req, res) {
   try {
     const limitnumber = 4;
-    const books = await book.find().populate('author').limit(limitnumber).sort({ nameofthebook: 1, rating: 1 });
+    const books = await book.find().populate('author').limit(limitnumber).sort({ _id: -1 });
     const authorlist = await author.find().limit(3)
     const bookslist = books;
     res.render('home', { title: 'homepage', bookslist, authorlist })
@@ -47,7 +47,7 @@ exports.bookpage = async function (req, res) {
     const books = req.params._id;
     const foundbook = await book.findById(books).populate('author')
     const genre = foundbook.genre;
-    const genrefound = await book.find({ "genre": genre }).populate('author');
+    const genrefound = await book.find({ "genre": genre }).populate('author').limit(4);
     const otherbooks = await book.find({}).populate("author").limit(3);
     const comment = await comments.find({ "bookId": books }).sort({ _id: -1 }).populate("userId")
     const infoerrorObj = req.flash('infoerror')
@@ -413,6 +413,17 @@ exports.postComment = async function (req, res) {
   }
   catch (error) {
     res.status(500).send("submit cannot be empty")
+  }
+}
+
+//posting blogs to the application
+
+exports.blogPost = async (req, res) => {
+  try {
+    res.render('blogAddition')
+  }
+  catch (error) {
+    res.status(500).send("internal server error")
   }
 }
 
