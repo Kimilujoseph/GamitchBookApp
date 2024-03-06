@@ -135,6 +135,18 @@ exports.loginAdminPage = async function (req, res) {
   }
 }
 
+exports.booksUploaded = async function (req, res) {
+  try {
+    const bookslist = await book.find({}).populate("author").sort({ _id: -1 });
+    const infoerrorObj = req.flash("infoerror")
+    const successObj = req.flash("success");
+    res.render("booksuploaded", { title: "booksuplaoded", bookslist, infoerrorObj, successObj })
+  }
+  catch (error) {
+    return res.status(500).send("Internal  server error")
+  }
+}
+
 
 //get request end
 
@@ -167,7 +179,7 @@ exports.addNew = async function (req, res) {
     //filehandling 
     if (!req.files || Object.keys(req.files) === 0) {
       req.flash('imageerror', 'no image submitted')
-      return req.redirect('/submit')
+      return res.redirect('/submit')
     }
     else {
       //the user has selected an image to upload so we will set sent  it to the server
@@ -185,7 +197,7 @@ exports.addNew = async function (req, res) {
       uploadedimageauthor.mv(uploadedimagepath, async function (error) {
         if (error) {
           req.flash('infoerror', "image failed to load")
-          return req.redirect('/submit')
+          return res.redirect('/submit')
         }
         else {
           try {
@@ -263,7 +275,7 @@ exports.addNew = async function (req, res) {
       await book.insertMany(bookData);
       res.status(201)
       req.flash('success', "Book and author successfully inserted")
-      req.redirect('/submit')
+      res.redirect('/submit')
 
     } else {
       const bookData = {
@@ -290,13 +302,25 @@ exports.addNew = async function (req, res) {
 
 };
 
+exports.removebook = async (req, res) => {
+  try {
+    const booktodelete = req.query.Id;
+    await book.findByIdAndDelete(booktodelete)
+    req.flash("success", "succefully deleted your book")
+    res.redirect("/admin/uploadedbooks")
+  }
+  catch (error) {
+    res.status(500).send("internal server error")
+  }
+}
+
 //handle email submission
 exports.addEmail = async (req, res) => {
   try {
     const { error } = emailValidation(req.body);
     if (error) {
       req.flash('infoerror', error.details[0].message);
-      res.redirect('/signinemail')
+      return res.redirect('/signinemail')
     }
     const userEmail = {
       email: req.body.email

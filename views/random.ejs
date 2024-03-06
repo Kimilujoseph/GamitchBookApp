@@ -23,14 +23,17 @@
                 <div class="row row-cols-8 row-cols-md-8 row-cols-lg-4 text-center">
                     <div class="book-item">
                         <div class="book-item-inner">
-                            <div class="image-box">
-                                <img src="/images/books/<%-chosenbook.imageofthebook%>"
-                                    alt="<%-chosenbook.nameofthebook %>" class="img-thumbnail" loading="lazy">
-                            </div>
+                            <a href="/books/<%-chosenbook._id%>">
+                                <div class="image-box">
+                                    <img src="/images/books/<%-chosenbook.imageofthebook%>"
+                                        alt="<%-chosenbook.nameofthebook %>" class="img-thumbnail">
+                                </div>
+                            </a>
+
                             <h4><a href="/books/<%-chosenbook._id%>"><%- chosenbook.nameofthebook %></a></h4>
                             <div class="author">
                                 <img src="/images/Authors/<%-chosenbook.author.image %>"
-                                    alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img" loading="lazy">
+                                    alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img">
                                 <span><a href="/author/<%-chosenbook.author._id%>"><%-chosenbook.author.name
                                             %></a></span>
                                 <span>(6.7)</span>

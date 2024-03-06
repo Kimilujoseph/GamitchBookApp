@@ -16,7 +16,7 @@
 
                     <div class="img-box mb-4">
                         <img src="/images/books/<%-foundbook.imageofthebook %>" alt="<%-foundbook.name%> image"
-                            class="img-thumbnail sticky-top" style="top: 20px;" loading="lazy">
+                            class="img-thumbnail sticky-top" style="top: 20px;">
                     </div>
                     <a href="/user/preference?_id=<%-foundbook._id%>" class="btn btn-success w-80">Add to
                         favourite</a>
@@ -134,16 +134,20 @@
             <div class="row row-cols-2 row-cols-lg-4 text-center">
                 <% if(genrefound !='' && genrefound.indexOf(foundbook)){%>
                     <%genrefound.forEach(function(items,index){%>
+
                         <div class="book-item">
                             <div class="book-item-inner">
-                                <div class="image-box">
-                                    <img src="/images/books/<%-items.imageofthebook%>" alt="<%-items.name%>"
-                                        class="img-thumbnail" loading="lazy">
-                                </div>
+                                <a href="/books/<%-items._id%>" class="text-decoration-none text-dark">
+                                    <div class="image-box">
+                                        <img src="/images/books/<%-items.imageofthebook%>" alt="<%-items.name%>"
+                                            class="img-thumbnail">
+                                    </div>
+                                </a>
+
                                 <h4><a href="/books/<%-items._id%>"><%-items.nameofthebook%></a></h4>
                                 <div class="author">
                                     <img src="/images/Authors/<%-items.author.image%>" alt="<%-items.author.name%>"
-                                        class="author-img" loading="lazy">
+                                        class="author-img">
                                     <span><a href="/author/<%-items.author._id%>"><%-items.author.name%></a></span>
                                 </div>
                                 <div class="rating-section">

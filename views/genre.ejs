@@ -26,14 +26,17 @@
                     <%genrefound.forEach(function(item,index){%>
                         <div class="book-item col-6 col-sm-6 col-md-4 col-lg-3">
                             <div class="book-item-inner">
-                                <div class="image-box">
-                                    <img src="/images/books/<%-item.imageofthebook%>" alt="<%-item.name %>"
-                                        class="img-thumbnail" loading="lazy">
-                                </div>
+                                <a href="/books/<%-item._id%>" class="text-decoration-none text-dark">
+                                    <div class="image-box">
+                                        <img src="/images/books/<%-item.imageofthebook%>" alt="<%-item.name %>"
+                                            class="img-thumbnail">
+                                    </div>
+                                </a>
+
                                 <h4><a href="/books/<%-item._id%>"><%- item.nameofthebook %></a></h4>
                                 <div class="author">
                                     <img src="/images/Authors/<%-item.author.image %>"
-                                        alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img" loading="lazy">
+                                        alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img">
                                     <span><a href="/author/<%-item.author._id%>"><%-item.author.name %></a></span>
 
                                 </div>

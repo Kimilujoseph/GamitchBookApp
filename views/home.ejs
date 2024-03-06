@@ -70,14 +70,16 @@
                     <%bookslist.forEach(function(item,index){%>
                         <div class="book-item">
                             <div class="book-item-inner">
-                                <div class="image-box">
-                                    <img src="/images/books/<%-item.imageofthebook %>" alt="<%-item.name %>"
-                                        class="img-thumbnail" loading="lazy">
-                                </div>
+                                <a href="/books/<%-item._id%>" class="text-decoration-none text-dark">
+                                    <div class=" image-box">
+                                        <img src="/images/books/<%-item.imageofthebook %>" alt="<%-item.name %>"
+                                            class="img-thumbnail">
+                                    </div>
+                                </a>
                                 <h4><a href="/books/<%-item._id%>"><%- item.nameofthebook %></a></h4>
                                 <div class="author">
                                     <img src="/images/Authors/<%-item.author.image %>"
-                                        alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img" loading="lazy">
+                                        alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img">
                                     <span><a href="/author/<%-item.author._id %>"><%-item.author.name %></a></span>
                                 </div>
                                 <div class="rating-section">
@@ -118,8 +120,7 @@
             <div class="row text-center">
                 <div class="col-md-12  col-lg-12 author-img-section">
                     <div class="img-box position-relative">
-                        <img src="/images/Authors/<%-authorlist[0].image%>" alt="an image" class="js-image-toggle"
-                            loading="lazy">
+                        <img src="/images/Authors/<%-authorlist[0].image%>" alt="an image" class="js-image-toggle">
                     </div>
                     <div id="carouselOne" class="carousel slide pt-4 text-center" data-bs-ride="carousel">
                         <%if(typeof authorlist !="undefined" && authorlist.length>0){%>

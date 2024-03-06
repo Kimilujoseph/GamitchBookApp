@@ -1,0 +1,56 @@
+<%- include("./partials/tabs.ejs") %>
+
+    <section class="book-section">
+        <div class="container">
+            <div class="row justify-content-center align-items-center g-2">
+                <div class="col-12 col-sm-8 col-md-8 col-lg-6">
+                    <%if(infoerrorObj !='' ){%>
+                        <div class="alert alert-danger" role="alert">
+                            <strong><%-infoerrorObj%></strong>
+                        </div>
+
+                        <%}%>
+
+                            <%if(successObj !='' ){%>
+                                <div class="alert alert-primary" role="alert">
+                                    <strong><%- successObj%></strong>
+                                </div>
+
+                                <%}%>
+                </div>
+            </div>
+
+            <div class="row row-cols-2 row-cols-lg-4 text-center">
+                <% if(bookslist !='' ){ %>
+                    <%bookslist.forEach(function(item,index){%>
+                        <div class="book-item">
+                            <div class="book-item-inner">
+                                <a href="/books/<%-item._id%>" class="text-decoration-none text-dark">
+                                    <div class=" image-box">
+                                        <img src="/images/books/<%-item.imageofthebook %>" alt="<%-item.name %>"
+                                            class="img-thumbnail">
+                                    </div>
+                                </a>
+                                <h4><a href="/books/<%-item._id%>"><%- item.nameofthebook %></a></h4>
+                                <div class="author">
+                                    <img src="/images/Authors/<%-item.author.image %>"
+                                        alt="jake-nackos-IF9TK5Uy-KI-unsplash.jpg" class="author-img">
+                                    <span><a href="/author/<%-item.author._id %>"><%-item.author.name %></a></span>
+                                </div>
+
+                                <div class="mt-3">
+                                    <form action="/book/delete?Id=<%-item._id%>" method="post">
+                                        <button type="submit" class="btn btn-outline-danger">remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <%})%>
+                            <% }else{%>
+                                <p>BOOKS WILL BE PUBLISHED SOON</p>
+                                <%}%>
+
+            </div>
+
+            <%- include("./partials/footer.ejs") %>

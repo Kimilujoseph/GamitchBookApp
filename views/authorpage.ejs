@@ -89,10 +89,13 @@
                                     <div class="col-md-6 col-lg-4 text-center">
                                         <div class="book-item">
                                             <div class="book-item-inner">
-                                                <div class="image-box">
-                                                    <img src="/images/books/<%-items.imageofthebook%>"
-                                                        alt="<%-items.name%>" class="img-thumbnail">
-                                                </div>
+                                                <a href="/books/<%-items._id%>">
+                                                    <div class="image-box">
+                                                        <img src="/images/books/<%-items.imageofthebook%>"
+                                                            alt="<%-items.name%>" class="img-thumbnail">
+                                                    </div>
+                                                </a>
+
                                                 <h4><a href="/books/<%-items._id%>"><%-items.nameofthebook%></a></h4>
                                                 <div class="author">
                                                     <img src="/images/Authors/<%-items.author.image%>"
